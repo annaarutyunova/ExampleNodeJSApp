@@ -1,3 +1,17 @@
+## Personal Notes
+1. Conrollers folder contains the code to control the process to deliver response to an incoming request. The brain of the operation. 
+2. Database folder contains files that describe how the application will interact with the database server. It's also used to store SQL files.
+3. A model is where SQL-based functions are stored to actually carry out data interactions between the project and the database server.
+4. Public folder stores static files (no dynamic code) like images, css, and client side js files.  
+5. A route file is one which describes a path that leads to the controller to process an incoming request. There are usually man routes. 
+6. Utilities are functions stored in files that contain reusable code that does not fall neatly into the MVC (multiple virtual storage).
+7. A view is a dynamic web page that is built by the server with data retrieved from the database. It is delivied to the browser to be viewed by the client.  
+8. .env is where the local environment variables are stored. These variables are typically for storing sensitive values. 
+9. .gitignore contains files that will not be uploaded to github. 
+10. package.json is the manifest of all resources needed in order for our project to function.
+11. README.md described a github repository. 
+12. server.js file is the project server. It describes how the application will work. 
+
 ## Getting Started
 
 This document is intended to get you started quickly in building a backend driven Node.js application complete with pages and content, backend logic and a PostgreSQL database for data storage.

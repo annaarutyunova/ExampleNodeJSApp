@@ -4,3 +4,12 @@
 *:after {
   box-sizing: border-box;
 }
+
+/* Small Screen */
+nav ul{
+  display:block;
+}
+nav ul li{
+  /* display:flex;
+  justify-content:space-between; */
+}

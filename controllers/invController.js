@@ -34,4 +34,15 @@ invCont.buildByInvId = async function(req, res, next){
   })
 }
 
+/* ***************************
+ *  Error
+ * ************************** */
+invCont.throwError = async function(req, res, next){
+try{
+  throw new Error("Made up error")
+}catch(error){
+  next(error)
+}
+}
+
 module.exports = invCont

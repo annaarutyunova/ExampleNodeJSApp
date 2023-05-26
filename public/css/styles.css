@@ -155,9 +155,63 @@ nav ul li a:hover{
 
 footer{
   margin-top: 40px;
-  text-align: center;
+  text-align: left;
+}
+#error:hover{
+  text-decoration: underline;
 }
 
+/*Inventory Grid*/
+#inv-display{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding-left: 0;
+}
+
+#inv-display h2{
+  margin: 10px 0;
+}
+
+#inv-display li a{
+  text-decoration: none;
+  color: black;
+}
+
+#inv-display li{
+  list-style-type: none;
+  margin: 20px;
+  margin-bottom: 50px;
+}
+
+#inv-display img{
+  margin: 0;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Inventory View */
+#invInfoWithImg{
+  display:grid;
+  grid-template-columns: 1fr;
+}
+
+#invInfoWithImg img{
+ width: 80%;
+}
+
+#description{
+  line-height: 2em;
+}
+
+#vehicles{
+  text-align: left;
+}
+
+#error{
+  text-decoration: none;
+  color:black;
+}
 /********** Large View **********/
 @media only screen and (min-width: 35em){
   #hero img{
@@ -219,6 +273,47 @@ footer{
   padding: 15px 30px;
 }
 
+footer{
+  padding-top: 0;
+}
+
+/*Inventory Grid*/
+#inv-display{
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#inv-display li{
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+#inv-display img{
+  width: 100%;
+  height: 200px;
+}
+
+
+/* Inventory View */
+#invInfoWithImg{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+#invName{
+  text-align: left;
+}
+
+#invInfoWithImg img{
+  grid-column: 1;
+  width: 100%;
+}
+
+#invInfo{
+  width: 80%;
+}
+
 }
 
 @media only screen and (min-width: 75em){
@@ -252,5 +347,11 @@ footer{
     margin: 0 auto;
     padding: 30px;
   }
+
+  /*Inventory Grid*/
+#inv-display{
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
 
 }

@@ -44,7 +44,7 @@ app.use(async (err, req, res, next) => {
   else{message = "Oops, you got lost. Try again."}
   res.render("errors/error", {
     title: err.status || 'Server Error',
-    message: err.message,
+    message: message,
     nav
   })
 }) 

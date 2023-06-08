@@ -1,0 +1,26 @@
+<!-- A content heading -->
+    <% if (title) { %>
+        <h1 class="bold" id="register_header"><%= title %></h1>
+        <% } else {
+          res.redirect('/')
+        } %>
+    <!-- A message -->
+    <% messages() %>
+    
+ <!--action="/account/register" - the path to be processed by the route, to understand what is being requested.
+method="post" - the manner in which the data is being sent to the server.  -->
+<form action="/account/register" method="post">
+    <!-- The login view -->
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="first name" required><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="last name" required><br>
+        <label for="email">Email address:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name = password required><br>
+        <input type="submit" value="Register">
+        <p>Already have an account? <a href="/account/login">Log in</a></p>
+    </form>
+    
+    

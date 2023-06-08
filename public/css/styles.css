@@ -3,10 +3,12 @@
 *:before,
 *:after {
   box-sizing: border-box;
+
 }
 
 /********* Fonts ************/
 /* for p */
+
 header, main, footer{
   background-color: white;
 }
@@ -217,6 +219,9 @@ footer{
   #hero img{
     width: 60%;
   }
+  body{
+    border: 4px solid maroon;
+  }
   #reviewUpdate{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -341,11 +346,18 @@ footer{
   }
   body{
     background-image: url(../images/site/checkerboard.jpg);
+    width: 80%;
+    margin: 0 auto;
   }
-  header, nav, main, footer{
-    max-width: 90%;
+  header, main, footer{
+    max-width: 100%;
     margin: 0 auto;
     padding: 30px;
+  }
+  nav {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 10px;
   }
 
   /*Inventory Grid*/

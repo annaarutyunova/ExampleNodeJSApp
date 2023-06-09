@@ -1,15 +1,15 @@
 <!-- A content heading -->
 
 <% if (title) { %>
-    <h1 class="bold" id="login_header"><%= title %></h1>
+    <h1 class="bold" id="loginTitle"><%= title %></h1>
     <% } else {
       res.redirect('/')
     } %>
 <!-- A message -->
-<% messages() %> 
+<%- messages() %> 
 
 <% if (errors) { %>
-  <ul class="notice">
+  <ul class="notice regular">
  <% errors.array().forEach(error => { %>
    <li><%= error.msg %></li>
 <%  }) %>
@@ -18,11 +18,11 @@
 
 <!-- The login view -->
 <form id="loginForm" action="/account/login" method="post">
-    <label for="account_email" required placeholder="Enter a valid email address">Email:</label><br>
-    <input type="email" id="account_email" name="account_email" required><br>
-    <label for="account_password">Password:</label><br>
-    <input type="password" id="account_password" name="account_password" required><br>
-    <input type="submit" value="Log in">
-    <p>No account? <a href="/account/register">Sign-up</a></p>
+    <label for="account_email" class="regular" required placeholder="Enter a valid email address">Email:</label><br>
+    <input type="email" class="regular" id="account_email" name="account_email" required><br>
+    <label for="account_password" class="regular">Password:</label><br>
+    <input type="password" class="regular" id="account_password" name="account_password" required><br>
+    <input type="submit" id="loginButton" value="Log in" class="regular">
+    <p class="regular">No account? <a href="/account/register" class="semi-bold">Sign-up</a></p>
 </form>
 

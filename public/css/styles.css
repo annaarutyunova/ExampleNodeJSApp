@@ -129,7 +129,6 @@ nav ul li a:hover{
 #flux, #bumper{
   grid-column: 1;
   border: 1px solid rgb(43, 45, 66, 0.2);
-  box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
   padding: 10px;
 }
 #flame, #hub {
@@ -215,17 +214,55 @@ footer{
   color:black;
 } 
 
-/* Possibly delete later  */
-/* input:required:invalid, input:focus:invalid {
-  background-image: url(/images/site/checkerboard.jpg);
+/* Form */ 
+#loginTitle, #registerTitle{
+  font-size: 1.5em;
+}
+
+input:required:invalid, input:focus:invalid {
+  background-color: rgb(252, 212, 212);
+  border: none;
   background-position: right top;
   background-repeat: no-repeat;
  }
   input:required:valid {
-  background-image: url(/images/vehicles/camaro-2019-tn.jpg);
+  background-color: rgb(235, 247, 235);
+  border: none;
   background-position: right top;
   background-repeat: no-repeat;
-  } */
+  } 
+
+#loginForm, #registerForm {
+  background-color: white;
+  max-width: 500px;
+  border: 2px solid maroon;
+  box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
+  padding: 20px;
+}
+
+#loginForm input, #registerForm input{
+  height: 40px;
+  margin: 7px 0 20px;
+  font-size: 1.2em;
+}
+
+#loginForm label, #registerForm label{
+  text-align: left; 
+}
+
+#loginButton, #registerButton{
+  background-color: maroon;
+  color:white;
+  border: none;
+  padding: 10px 20px;
+}
+
+
+.notice{
+  list-style: none;
+}
+
+
 
 /********** Large View **********/
 @media only screen and (min-width: 35em){
@@ -233,8 +270,8 @@ footer{
     width: 60%;
   }
   body{
-    border: 4px solid maroon;
-    padding: 0 10px;
+    border: 3px solid maroon;
+    padding: 10px;
   }
   #reviewUpdate{
     display:grid;
@@ -245,6 +282,9 @@ footer{
   }
   #review{
     grid-column: 2;
+  }
+  nav{
+    margin-top: 20px;
   }
   nav ul li a{
     font-size: 1.6em;
@@ -331,6 +371,14 @@ footer{
 
 #invInfo{
   width: 80%;
+}
+
+#loginForm, #registerForm {
+  background-color: white;
+  max-width: 500px;
+  border: 10px solid maroon;
+  box-shadow: 0 0 5px rgb(43, 45, 66, 0.2);
+  padding: 20px;
 }
 
 }

@@ -30,6 +30,9 @@ app.use(session({
   name: 'sessionId',
 }))
 
+// Favicon not working
+app.use('/favicon.ico', express.static('/images/favicon.ico'));
+
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){

@@ -8,12 +8,20 @@
 <!-- A message -->
 <% messages() %> 
 
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <!-- The login view -->
-<form>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name = password required><br>
+<form id="loginForm" action="/account/login" method="post">
+    <label for="account_email" required placeholder="Enter a valid email address">Email:</label><br>
+    <input type="email" id="account_email" name="account_email" required><br>
+    <label for="account_password">Password:</label><br>
+    <input type="password" id="account_password" name="account_password" required><br>
     <input type="submit" value="Log in">
     <p>No account? <a href="/account/register">Sign-up</a></p>
 </form>

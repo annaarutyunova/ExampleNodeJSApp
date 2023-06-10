@@ -105,7 +105,7 @@ invCont.buildNewVehicle = async function(req, res, next){
  /* ****************************************
 *  Process Add New Vehicle
 * *************************************** */
-invCont.addNewVehicle = async function(req, res) {
+invCont.buildNewVehicleForm = async function(req, res) {
   let nav = await utilities.getNav()
   const classificationData = await invModel.getClassifications()
   let select = await utilities.selectClassification(classificationData.rows)
@@ -113,8 +113,8 @@ invCont.addNewVehicle = async function(req, res) {
   const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, 
   inv_price, inv_year, inv_miles, inv_color} = req.body
 
-  // Need to build invMode.addNewVehicle
-  const newVehicleResult = await invModel.addNewVehicle(
+  // Need to build invMode.buildNewVehicleForm
+  const newVehicleResult = await invModel.buildNewVehicleForm(
     inv_make, 
     inv_model, 
     inv_description, 

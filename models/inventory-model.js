@@ -59,7 +59,7 @@ async function checkExistingClassification(classification_name){
   }
 }
 
-async function addNewVehicle( inv_make, 
+async function buildNewVehicleForm( inv_make, 
   inv_model, 
   inv_description, 
   inv_image, 
@@ -81,4 +81,4 @@ async function addNewVehicle( inv_make,
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addNewClass, checkExistingClassification, addNewVehicle};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addNewClass, checkExistingClassification, buildNewVehicleForm};

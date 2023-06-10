@@ -59,6 +59,15 @@ async function checkExistingClassification(classification_name){
   }
 }
 
+async function addNewVehicle(inv_make){
+  try {
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 
 

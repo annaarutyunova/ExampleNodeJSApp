@@ -66,10 +66,10 @@ invCont.buildAddClass = async function(req, res, next){
 invCont.addNewClass = async function(req, res) {
   const { classification_name } = req.body
 
-  const newClassResult = await invModel.addNewClass(
+  const newVehicleResult = await invModel.addNewClass(
     classification_name
   )
-  if (newClassResult) {
+  if (newVehicleResult) {
     let nav = await utilities.getNav()
     req.flash(
       "notice",
@@ -89,6 +89,60 @@ invCont.addNewClass = async function(req, res) {
     })
   }
 }
+
+/* ***************************
+ *  Build add buildNewVehicles
+ * ************************** */
+invCont.buildNewVehicle = async function(req, res, next){
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory",{
+    title: "Add Vehicle",
+    nav, 
+    errors: null,
+  })
+}
+
+ /* ****************************************
+*  Process Add New Vehicle
+* *************************************** */
+invCont.addNewVehicle = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, 
+  inv_price, inv_year, inv_miles, inv_color} = req.body
+
+  // Need to build invMode.addNewVehicle
+  const newVehicleResult = await invModel.addNewVehicle(
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, inv_color
+  )
+  if (newVehicleResult) {
+    // Instead of getNav() it should be buildInvView()
+    let nav = await utilities.buildInvView()
+    req.flash(
+      "notice",
+      `The ${inv_make} ${inv_mode} was successfully added.`
+    )
+    res.status(201).render("./inventory/management", {
+      title: "Add Vehicle",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, adding a new vehicle went wrong. Try again.")
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add Vehicle",
+      nav,
+      errors
+    })
+  }
+}
+
 
 
 

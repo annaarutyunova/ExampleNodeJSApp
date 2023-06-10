@@ -19,25 +19,26 @@
     <!-- The login view -->
         <label for="account_firstname" class="regular">First Name:</label><br>
         <input type="text" id="account_firstname" name="account_firstname" required value="<%= locals.account_firstname %>"><br>
-        <label for="Make" class="regular">Make:</label><br>
-        <input type="text" id="invMake" name="inv_make" required value="<%= locals.inv_make %>"><br>
-        <label for="inv_model" class="regular">Email address:</label><br>
-        <input type="text" id="invModel" name="inv_model" required value="<%= locals.inv_model %>"><br>
+        
+        <label for="Make" class="regular">Make</label><br>
+        <input type="text" id="invMake" name="inv_make" required placeholder="Min 3 characters" value="<%= locals.inv_make %>"><br>
+        <label for="inv_model" class="regular">Model</label><br>
+        <input type="text" id="invModel" name="inv_model" required placeholder="Min 3 characters" value="<%= locals.inv_model %>"><br>
         <label for="inv_description" class="regular">Description:</label><br>
         <input type="textarea" id="invDescription" name="inv_description" required value="<%= locals.inv_description %>"><br>
 
-        <label for="inv_image" class="regular">Image Path:</label><br>
+        <label for="inv_image" class="regular">Image Path</label><br>
         <input type="text" id="invImage" name="inv_image" required value="<%= locals.inv_make %>"><br>
-        <label for="inv_thumbnail" class="regular">Thumbnail Path:</label><br>
+        <label for="inv_thumbnail" class="regular">Thumbnail Path</label><br>
         <input type="text" id="invThumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>"><br>
-        <label for="inv_price" class="regular">Price:</label><br>
+        <label for="inv_price" class="regular">Price</label><br>
         <input type="text" id="invPrice" name="inv_price" required value="<%= locals.inv_price %>"><br>
 
-        <label for="inv_year" class="regular">Year:</label><br>
-        <input type="text" id="invYear" name="inv_year" required value="<%= locals.inv_year %>"><br>
-        <label for="inv_miles" class="regular">Thumbnail Path:</label><br>
+        <label for="inv_year" class="regular">Year</label><br>
+        <input type="text" id="invYear" name="inv_year" minlength="4" maxlength="4" pattern="[0-9]{4}" required value="<%= locals.inv_year %>"><br>
+        <label for="inv_miles" class="regular">Thumbnail Path</label><br>
         <input type="text" id="invMiles" name="inv_miles" required value="<%= locals.inv_miles %>"><br>
-        <label for="inv_color" class="regular">Color:</label><br>
+        <label for="inv_color" class="regular">Color</label><br>
         <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br>
 
         <input type="submit" value="Add Vehicle" class="semi-bold" id="addVehicleButton">

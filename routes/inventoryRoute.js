@@ -20,4 +20,6 @@ router.post(
     utilities.handleErrors(invController.addNewClass)
     )
 
+router.get("/new-vehicle", utilities.handleErrors(invController.buildNewVehicle))
+
 module.exports = router;

@@ -258,12 +258,9 @@ input:required:invalid, input:focus:invalid {
   padding: 10px 20px;
 }
 
-
 .notice{
-  list-style: none;
   padding-left: 0;
 }
-
 
 
 /********** Large View **********/

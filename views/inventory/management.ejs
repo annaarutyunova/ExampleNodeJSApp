@@ -1,8 +1,11 @@
 <!-- A content heading -->
+
 <% if (title) { %>
     <h1 class="semi-bold" id="managementTitle"><%= title %></h1>
+    <%- messages() %> 
     <a class="regular" href="/inv/add-classification"><p>Add New Classification</p></a>
     <a class="regular" href="/inv/new-vehicle"><p>Add New Vehicles</p></a>
     <% } else {
       res.redirect('/')
     } %>
+

@@ -81,6 +81,32 @@ Util.buildInvView = async function(data){
   return div
 }
 
+
+
+/* ************************
+ * Constructs select classification in form in inventory when adding new vehicle
+ ************************** */
+Util.selectClassification = async function(data) {
+  let select = "<select class='regular'>"
+  for(let i=0; i < data.length; i++){
+    console.log(data)
+    select += `<option class="regular" value="${data[i].classification_name}">${data[i].classification_name}</option> `
+  }
+
+  // data.rows.forEach((row) => {
+  //   select += "<option value="
+  //   select +=
+  //     row.classification_id +
+  //     '">' +
+  //     row.classification_name 
+  //   select += "</option>"
+  // })
+  select += "</select>"
+  return select
+}
+
+
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

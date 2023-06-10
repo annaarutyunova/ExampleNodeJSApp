@@ -59,17 +59,26 @@ async function checkExistingClassification(classification_name){
   }
 }
 
-async function addNewVehicle(inv_make){
-  try {
-    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
-    return await pool.query(sql, [classification_name])
-  } catch (error) {
-    return error.message
-  }
+async function addNewVehicle( inv_make, 
+  inv_model, 
+  inv_description, 
+  inv_image, 
+  inv_thumbnail, 
+  inv_price, 
+  inv_year, 
+  inv_miles, 
+  inv_color){
+  
+  // try {
+  //   const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+  //   return await pool.query(sql, [classification_name])
+  // } catch (error) {
+  //   return error.message
+  // }
 }
 
 
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addNewClass, checkExistingClassification};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addNewClass, checkExistingClassification, addNewVehicle};

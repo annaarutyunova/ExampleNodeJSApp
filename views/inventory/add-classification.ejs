@@ -5,22 +5,19 @@
       res.redirect('/')
     } %>
 <!-- A message -->
-<% messages() %>
+<%- messages() %>
 
 <% if (errors) { %>
-    <ul class="notice">
+    <ul class="notice semi-bold">
    <% errors.array().forEach(error => { %>
      <li><%= error.msg %></li>
   <%  }) %>
    </ul>
   <% } %>
 
-<!--action="/account/register" - the path to be processed by the route, to understand what is being requested.
-method="post" - the manner in which the data is being sent to the server.  -->
 <form id="addClassForm" action="/inv/add-classification" method="post">
-<!-- The login view -->
-    <label for="classification_name" class="regular">Classification Name<br>
+    <label for="classification_name" class="regular"><strong>Classification Name</strong><br><br>
         Name must be alphabetic characters only</label><br>
-    <input type="text" id="className" name="classification_name" required value="<%= locals.account_email %>"><br>
+    <input type="text" id="className" name="classification_name" required pattern="[A-Za-z]+" value="<%= locals.classification_name %>"><br>
     <input type="submit" value="Add Classification" class="semi-bold" id="addClassButton">
 </form>

@@ -129,6 +129,7 @@ nav ul li a:hover{
 #flux, #bumper{
   grid-column: 1;
   border: 1px solid rgb(43, 45, 66, 0.2);
+  box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
   padding: 10px;
 }
 #flame, #hub {
@@ -205,7 +206,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle{
   text-align: left;
 }
 
@@ -215,7 +216,7 @@ footer{
 } 
 
 /* Form */ 
-#loginTitle, #registerTitle{
+#loginTitle, #registerTitle {
   font-size: 1.5em;
 }
 
@@ -232,7 +233,7 @@ input:required:invalid, input:focus:invalid {
   background-repeat: no-repeat;
   } 
 
-#loginForm, #registerForm {
+#loginForm, #registerForm, #addClassForm {
   background-color: white;
   max-width: 500px;
   border: 2px solid maroon;
@@ -240,17 +241,17 @@ input:required:invalid, input:focus:invalid {
   padding: 20px;
 }
 
-#loginForm input, #registerForm input{
+#loginForm input, #registerForm input, #addClassForm input{
   height: 40px;
   margin: 7px 0 20px;
   font-size: 1.2em;
 }
 
-#loginForm label, #registerForm label{
+#loginForm label, #registerForm label, #addClassForm label{
   text-align: left; 
 }
 
-#loginButton, #registerButton{
+#loginButton, #registerButton, #addClassButton{
   background-color: maroon;
   color:white;
   border: none;
@@ -260,6 +261,7 @@ input:required:invalid, input:focus:invalid {
 
 .notice{
   list-style: none;
+  padding-left: 0;
 }
 
 
@@ -271,7 +273,9 @@ input:required:invalid, input:focus:invalid {
   }
   body{
     border: 3px solid maroon;
-    padding: 10px;
+  }
+  nav, footer, header, main{
+    padding: 0 10px;
   }
   #reviewUpdate{
     display:grid;

@@ -1,5 +1,4 @@
 <!-- A content heading -->
-
 <% if (title) { %>
     <h1 class="bold" id="loginTitle"><%= title %></h1>
     <% } else {
@@ -9,7 +8,7 @@
 <%- messages() %> 
 
 <% if (errors) { %>
-  <ul class="notice regular">
+  <ul class="notice semi-bold">
  <% errors.array().forEach(error => { %>
    <li><%= error.msg %></li>
 <%  }) %>

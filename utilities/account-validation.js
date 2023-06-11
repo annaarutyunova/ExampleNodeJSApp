@@ -113,7 +113,7 @@ validate.checkLoginData = async (req, res, next) => {
         errors,
         title: "Login",
         nav,
-        account_email,
+        account_email
       })
       return
     }

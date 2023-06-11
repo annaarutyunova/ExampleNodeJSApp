@@ -21,6 +21,12 @@ router.post(
     )
 
 router.get("/new-vehicle", utilities.handleErrors(invController.buildNewVehicleForm))
-// add router.post(inv.Controller.)
+// add router.post(inv.Controller.addNewVehicle)
+router.post(
+    "/add-inventory",
+    // invValidate.newClassificationRules(),
+    // invValidate.checkNewClassificationData,
+    utilities.handleErrors(invController.addNewVehicle)
+    )
 
 module.exports = router;

@@ -87,7 +87,7 @@ Util.buildInvView = async function(data){
  * Constructs select classification in form in inventory when adding new vehicle
  ************************** */
 Util.selectClassification = async function(data) {
-  let select = "<select name='classification_id' class='regular'>"
+  let select = "<select name='classification_id' class='semi-bold'>"
   for(let i=0; i < data.length; i++){
     select += `<option class="regular" value="${data[i].classification_id}">${data[i].classification_name}</option> `
   }

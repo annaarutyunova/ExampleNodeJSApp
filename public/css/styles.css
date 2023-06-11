@@ -220,46 +220,59 @@ footer{
   font-size: 1.5em;
 }
 
-input:required:invalid, input:focus:invalid {
+input:required:invalid, input:focus:invalid , textarea:required:invalid, textarea:focus:invalid{
   background-color: rgb(252, 212, 212);
   border: none;
   background-position: right top;
   background-repeat: no-repeat;
  }
-  input:required:valid {
+  input:required:valid, textarea:required:valid {
   background-color: rgb(235, 247, 235);
   border: none;
   background-position: right top;
   background-repeat: no-repeat;
   } 
+  
+  .notice{
+    font-size: 1.2em;
+  }
 
-#loginForm, #registerForm, #addClassForm {
+  textarea{
+    font-size: 1.2em;
+    width: auto;
+    height: 100px;
+  }
+  select{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    max-width: 200px;
+    height: 30px;
+    font-size: 1.2em;
+  }
+
+#loginForm, #registerForm, #addClassForm, #addNewVehicleform{
   background-color: white;
-  max-width: 500px;
+  max-width: 800px;
   border: 2px solid maroon;
   box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
   padding: 20px;
 }
 
-#loginForm input, #registerForm input, #addClassForm input{
+#loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input{
   height: 40px;
   margin: 7px 0 20px;
   font-size: 1.2em;
 }
 
-#loginForm label, #registerForm label, #addClassForm label{
+#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform input{
   text-align: left; 
 }
 
-#loginButton, #registerButton, #addClassButton{
+#loginButton, #registerButton, #addClassButton, #addVehicleButton{
   background-color: maroon;
   color:white;
   border: none;
   padding: 10px 20px;
-}
-
-.notice{
-  padding-left: 0;
 }
 
 

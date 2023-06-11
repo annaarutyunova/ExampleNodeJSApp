@@ -21,11 +21,11 @@ router.post(
     )
 
 router.get("/new-vehicle", utilities.handleErrors(invController.buildNewVehicleForm))
-// add router.post(inv.Controller.addNewVehicle)
+// add router.post(invController.addNewVehicle)
 router.post(
     "/add-inventory",
-    // invValidate.newClassificationRules(),
-    // invValidate.checkNewClassificationData,
+    invValidate.addNewVehicleRules(),
+    invValidate.checkNewVehicleData,
     utilities.handleErrors(invController.addNewVehicle)
     )
 

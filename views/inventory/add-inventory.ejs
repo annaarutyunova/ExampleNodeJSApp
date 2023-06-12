@@ -25,7 +25,7 @@
         <label for="invModel" class="regular">Model:*</label><br>
         <input type="text" id="invModel" minlength="3" name="inv_model" required placeholder="Min 3 characters" value="<%= locals.inv_model %>"><br>
         <label for="invDescription" class="regular">Description:*</label><br>
-        <textarea id="invDescription" class="regular" name="inv_description" required value="<%= locals.inv_description %>"></textarea><br>
+        <textarea id="invDescription" class="regular" name="inv_description" required><%= locals.inv_description %></textarea><br>
 
         <label for="invImage" class="regular">Image Path:*</label><br>
         <input type="text" id="invImage" name="inv_image" required value="/images/vehicles/no-image.png" value="<%= locals.inv_make %>"><br>

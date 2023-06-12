@@ -40,6 +40,8 @@ validate.checkNewClassificationData = async (req, res, next) => {
     }
     next()
   }
+
+
   
 // Server side validation for Add New Vehicle 
 validate.addNewVehicleRules = () => {

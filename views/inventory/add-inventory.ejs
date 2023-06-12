@@ -17,8 +17,9 @@
 
   <form id="addNewVehicleform" action="/inv/add-inventory" method="post">
     <!-- The login view -->
-    <label class="regular">Classification</label><br>
+    <label class="regular">Classification:*</label><br>
     <%- select %><br>
+    <%#- options %><br>
         
         <label for="invMake" class="regular">Make:*</label><br>
         <input type="text" id="invMake" minlength="3" name="inv_make" required placeholder="Min 3 characters" value="<%= locals.inv_make %>"><br>

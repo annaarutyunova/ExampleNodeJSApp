@@ -91,18 +91,24 @@ Util.selectClassification = async function(data) {
   for(let i=0; i < data.length; i++){
     select += `<option class="regular" value="${data[i].classification_id}">${data[i].classification_name}</option> `
   }
-
-  // data.rows.forEach((row) => {
-  //   select += "<option value="
-  //   select +=
-  //     row.classification_id +
-  //     '">' +
-  //     row.classification_name 
-  //   select += "</option>"
-  // })
   select += "</select>"
   return select
 }
+
+// Util.selectClassification = async function(optionSelected){
+//   let data = await invModel.getClassifications()
+//   let options = "<option value=''>Choose a Classification</option>"
+//   data.rows.forEach((row) => {
+//     options += `
+//     <option
+//       value = "${row.classification_id}"
+//       ${row.classification_id === Number(optionSelected)? 'selected':''}
+//       >
+//       ${row.classification_name}
+//     </option>`
+//   })
+//   return options
+// }
 
 
 

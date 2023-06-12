@@ -61,8 +61,8 @@ validate.addNewVehicleRules = () => {
       .withMessage("Please provide some description."),  
     body("inv_price")
       .trim()
-      .isNumeric()
-      // .matches(/"[0-9.]*"/)
+      // .isNumeric()
+      .matches(/^\d+([.]\d+)?$/)
       .withMessage("Please provide vehicle price."),
     body("inv_year")
       .trim()
@@ -70,7 +70,7 @@ validate.addNewVehicleRules = () => {
       .withMessage("Please provide valid vehicle year."),
     body("inv_miles")
       .trim()
-      .isNumeric()
+      .matches(/^\d+([.]\d+)?$/)
       .withMessage("Please provide vehicle mileage."),
     body("inv_color")
       .trim()

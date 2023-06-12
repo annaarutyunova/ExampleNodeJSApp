@@ -32,12 +32,12 @@
         <label for="invThumbnail" class="regular">Thumbnail Path:*</label><br>
         <input type="text" id="invThumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required value="<%= locals.inv_thumbnail %>"><br>
         <label for="invPrice" class="regular">Price:*</label><br>
-        <input type="float" id="invPrice" name="inv_price" pattern="[0-9.]*" required value="<%= locals.inv_price %>"><br>
+        <input type="text" id="invPrice" name="inv_price" pattern="^\d+([.]\d+)?$" required value="<%= locals.inv_price %>"><br>
 
         <label for="invYear" class="regular">Year:*</label><br>
         <input type="text" id="invYear" name="inv_year" minlength="4" maxlength="4" pattern="[0-9]{4}" required value="<%= locals.inv_year %>"><br>
         <label for="invMiles" class="regular">Miles:*</label><br>
-        <input type="float" id="invMiles" name="inv_miles" pattern="[0-9.]*" required value="<%= locals.inv_miles %>"><br>
+        <input type="text" id="invMiles" name="inv_miles" pattern="[0-9]*" required value="<%= locals.inv_miles %>"><br>
         <label for="invColor" class="regular">Color:*</label><br>
         <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br>
 

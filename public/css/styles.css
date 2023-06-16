@@ -235,6 +235,12 @@ input:required:invalid, input:focus:invalid , textarea:required:invalid, textare
   
   .notice{
     font-size: 1.2em;
+    color: rgb(214, 35, 35);
+  }
+
+  .success{
+    color: green;
+    font-size: 1.2em;
   }
 
   textarea{

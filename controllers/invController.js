@@ -78,7 +78,7 @@ invCont.addNewClass = async function(req, res) {
   if (newVehicleResult) {
     let nav = await utilities.getNav()
     req.flash(
-      "notice",
+      "success semi-bold",
       `The ${classification_name} classification was successfully added.`
     )
     res.status(201).render("./inventory/management", {
@@ -144,7 +144,7 @@ invCont.addNewVehicle = async function(req, res) {
       const classificationData = await invModel.getClassifications()
       let select = await utilities.selectClassification(classificationData.rows)
       req.flash(
-        "notice",
+        "success semi-bold",
         `The ${inv_make} ${inv_model} was successfully added.`
       )
       res.status(201).render("./inventory/management", {

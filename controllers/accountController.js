@@ -61,7 +61,7 @@ async function registerAccount(req, res) {
   
     if (regResult) {
       req.flash(
-        "notice",
+        "success semi-bold",
         `Congratulations, ${account_firstname}, you\'re registered . Please log in.`
       )
       res.status(201).render("account/login", {
@@ -114,7 +114,7 @@ async function accountLogin(req, res) {
 // Account Management
 async function buildAccountManagement(req, res) {
   let nav = await utilities.getNav()
-  req.flash("notice", "You're logged in")
+  req.flash("success semi-bold", "You're logged in")
   res.render("account/account", {
     title: "Account Management",
     nav,

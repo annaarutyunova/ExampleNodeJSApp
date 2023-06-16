@@ -206,7 +206,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle{
   text-align: left;
 }
 
@@ -264,7 +264,7 @@ input:required:invalid, input:focus:invalid , textarea:required:invalid, textare
   font-size: 1.2em;
 }
 
-#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform input{
+#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label{
   text-align: left; 
 }
 

@@ -1,0 +1,16 @@
+<!-- A content heading -->
+<% if (title) { %>
+    <h1 class="bold" id="accountTitle"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+<!-- A message -->
+<%- messages() %> 
+
+<% if (errors) { %>
+  <ul class="notice semi-bold">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>

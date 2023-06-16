@@ -14,6 +14,13 @@ const regValidate = require('../utilities/account-validation')
  * Unit 4, deliver login view activity
  ***************************************/
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
+// Process the login attempt
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 router.post(
@@ -23,14 +30,9 @@ router.post(
     utilities.handleErrors(accountController.registerAccount)
     )
 
-// Process the login attempt
-router.post(
-    "/login",
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
-    (req, res) => {
-      res.status(200).send('login process')
-    }
-  )
+// Add a default route for accounts.
+router.get("/", utilities.handleErrors(accountController.buildAccountManagement))
+
+
 
 module.exports = router

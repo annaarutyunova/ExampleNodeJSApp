@@ -55,7 +55,7 @@ Util.buildClassificationGrid = async function(data){
     })
     grid += '</ul>'
   } else { 
-    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    grid += '<p class="notice semi-bold">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
 }
@@ -142,6 +142,18 @@ Util.checkJWTToken = (req, res, next) => {
     })
   } else {
    next()
+  }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
   }
  }
 

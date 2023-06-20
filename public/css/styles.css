@@ -15,6 +15,9 @@ header, main, footer{
 nav{
   background-color: black;
 }
+footer p{
+  margin-top: 0;
+}
 #tools a:hover{
   color: rgb(0,0,170)
 }
@@ -245,41 +248,65 @@ input:required:invalid, input:focus:invalid , textarea:required:invalid, textare
 
   textarea{
     font-size: 1.2em;
-    width: auto;
-    height: 100px;
+    width: 100%;
+    height: 70px;
   }
   select{
     margin-top: 10px;
     margin-bottom: 20px;
     max-width: 200px;
     height: 30px;
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 
 #loginForm, #registerForm, #addClassForm, #addNewVehicleform{
   background-color: white;
-  max-width: 800px;
+  width: 100%;
   border: 2px solid maroon;
   box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
   padding: 20px;
+  
 }
 
 #loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input{
   height: 40px;
   margin: 7px 0 20px;
   font-size: 1.2em;
+  width: 100%;
 }
 
 #loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label{
   text-align: left; 
 }
 
-#loginButton, #registerButton, #addClassButton, #addVehicleButton{
+#loginButton, #registerButton, #addClassButton, #addVehicleButton, #editVehicleButton, #deleteVehicleButton{
   background-color: maroon;
   color:white;
   border: none;
   padding: 10px 20px;
+  text-align: left;
 }
+
+select{
+  max-width: 650px;
+  margin-bottom: 0;
+}
+
+table{
+  margin-top: 20px;
+  width: 100%;
+  line-height: 1.6em;
+}
+
+td a{
+  color:black;
+}
+
+thead{
+  background-color: burlywood;
+}
+
+
 
 
 /********** Large View **********/
@@ -434,8 +461,9 @@ footer{
   header, main, footer{
     max-width: 100%;
     margin: 0 auto;
-    padding: 30px;
+    padding: 20px;
   }
+
   nav {
     max-width: 100%;
     margin: 0 auto;

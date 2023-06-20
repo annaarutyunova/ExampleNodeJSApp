@@ -11,6 +11,8 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId));
 router.get("/throwError", utilities.handleErrors(invController.throwError));
 router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
 
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClass))
 router.post(
@@ -27,6 +29,20 @@ router.post(
     invValidate.addNewVehicleRules(),
     invValidate.checkNewVehicleData,
     utilities.handleErrors(invController.addNewVehicle)
+    )
+
+// Activity 5 Build a modify vehicle view when clicked on "modify"
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+router.post("/update/",
+    invValidate.addNewVehicleRules(),
+    invValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory)
+    )
+
+// Activity 5 Delete
+router.get("/delete/:inv_id", utilities.handleErrors(invController.confirmDeleteInventoryView))
+router.post("/delete/",
+    utilities.handleErrors(invController.deleteInventory)
     )
 
 module.exports = router;

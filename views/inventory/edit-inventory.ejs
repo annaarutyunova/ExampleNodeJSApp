@@ -1,6 +1,6 @@
 <!-- A content heading -->
 <% if (title) { %>
-    <h1 class="bold" id="addInventoryTitle"><%= title %></h1>
+    <h1 class="bold" id="editInventoryTitle"><%= title %></h1>
     <% } else {
       res.redirect('/')
     } %>
@@ -15,7 +15,7 @@
    </ul>
   <% } %>
 
-  <form id="addNewVehicleform" action="/inv/add-inventory" method="post">
+  <form id="updateForm" action="/inv/update" method="post">
     <!-- The login view -->
     <label class="regular">Classification:*</label><br>
     <%- select %><br>
@@ -42,5 +42,10 @@
         <label for="invColor" class="regular">Color:*</label><br>
         <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br>
 
-        <button type="button" class="semi-bold" id="addVehicleButton">Add Vehicle</button>
+        <button type="submit" class="semi-bold" id="editVehicleButton" disabled>Update Vehicle</button>
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
   </form>
+
+<script src="../../js/inv-update.js"></script>

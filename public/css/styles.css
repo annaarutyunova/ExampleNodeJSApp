@@ -209,8 +209,9 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle{
   text-align: left;
+  font-size: 1.5em;
 }
 
 #error{
@@ -218,10 +219,6 @@ footer{
   color:black;
 } 
 
-/* Form */ 
-#loginTitle, #registerTitle {
-  font-size: 1.5em;
-}
 
 input:required:invalid, input:focus:invalid , textarea:required:invalid, textarea:focus:invalid{
   background-color: rgb(252, 212, 212);
@@ -229,37 +226,37 @@ input:required:invalid, input:focus:invalid , textarea:required:invalid, textare
   background-position: right top;
   background-repeat: no-repeat;
  }
-  input:required:valid, textarea:required:valid {
-  background-color: rgb(235, 247, 235);
-  border: none;
-  background-position: right top;
-  background-repeat: no-repeat;
-  } 
-  
-  .notice{
-    font-size: 1.2em;
-    color: rgb(214, 35, 35);
-  }
+input:required:valid, textarea:required:valid {
+background-color: rgb(235, 247, 235);
+border: none;
+background-position: right top;
+background-repeat: no-repeat;
+} 
 
-  .success{
-    color: green;
-    font-size: 1.2em;
-  }
+.notice{
+  font-size: 1.2em;
+  color: rgb(214, 35, 35);
+}
 
-  textarea{
-    font-size: 1.2em;
-    width: 100%;
-    height: 70px;
-  }
-  select{
-    margin-top: 10px;
-    margin-bottom: 20px;
-    max-width: 200px;
-    height: 30px;
-    font-size: 1.1em;
-  }
+.success{
+  color: green;
+  font-size: 1.2em;
+}
 
-#loginForm, #registerForm, #addClassForm, #addNewVehicleform{
+textarea{
+  font-size: 1.2em;
+  width: 100%;
+  height: 100px;
+}
+select{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  max-width: 200px;
+  height: 30px;
+  font-size: 1.1em;
+}
+
+#loginForm, #registerForm, #addClassForm, #addNewVehicleform, #deleteForm{
   background-color: white;
   width: 100%;
   border: 2px solid maroon;
@@ -268,14 +265,14 @@ input:required:invalid, input:focus:invalid , textarea:required:invalid, textare
   
 }
 
-#loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input{
+#loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input, #updateForm input, #deleteForm input{
   height: 40px;
   margin: 7px 0 20px;
   font-size: 1.2em;
   width: 100%;
 }
 
-#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label{
+#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label, #updateForm label, #deleteForm label{
   text-align: left; 
 }
 
@@ -295,15 +292,22 @@ select{
 table{
   margin-top: 20px;
   width: 100%;
-  line-height: 1.6em;
+  line-height: 3em;
 }
 
 td a{
   color:black;
 }
-
+tbody, th, td{
+  border-bottom: 1px solid black;
+  /* padding-left:  5px; */
+}
 thead{
   background-color: burlywood;
+  text-align:left;
+}
+tr th{
+  /* padding-left: 5px; */
 }
 
 
@@ -420,7 +424,7 @@ footer{
   width: 80%;
 }
 
-#loginForm, #registerForm {
+#loginForm, #registerForm, #updateForm {
   background-color: white;
   max-width: 500px;
   border: 10px solid maroon;

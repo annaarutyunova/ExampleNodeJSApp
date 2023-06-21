@@ -30,7 +30,7 @@
         <label for="invYear" class="regular">Year:*</label><br>
         <input type="text" id="invYear" name="inv_year" minlength="4" maxlength="4" pattern="[0-9]{4}" required value="<%= locals.inv_year %>" readonly><br>
         <p>Confirm Deletion - The delete is permanent.</p>
-        <button type="button" class="semi-bold" id="deleteVehicleButton">Delete</button>
+        <button type="submit" class="semi-bold" id="deleteVehicleButton">Delete</button>
         <input type="hidden" name="inv_id"
         <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
         <% } %>>

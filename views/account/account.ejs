@@ -4,8 +4,12 @@
     <% } else {
       res.redirect('/')
     } %>
+
+<h2>Welcome <%-locals.accountData.account_firstname %></h2>
 <!-- A message -->
 <%- messages() %> 
+<p><a href="/">Edit account information</a></p>
+
 
 <% if (errors) { %>
   <ul class="notice semi-bold">
@@ -13,4 +17,11 @@
    <li><%= error.msg %></li>
 <%  }) %>
  </ul>
+<% } %>
+
+
+<!-- Assignment 5 -->
+<% if(locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin' ){  %>
+    <h2>Inventory Management</h2>
+    <p><a href="/inv">Manage Inventory</a></p>
 <% } %>

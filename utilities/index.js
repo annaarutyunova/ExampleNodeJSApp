@@ -137,6 +137,28 @@ Util.checkJWTToken = (req, res, next) => {
   }
 }
 
+
+/* ****************************************
+* Middleware to check the account type
+// **************************************** */
+// Util.checkJWTToken = (req, res, next) => {
+//   if (req.cookies.jwt) {
+//     jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, function (err, accountData) { 
+//       if (err) {
+//         req.flash("Please log in") 
+//         res.clearCookie("jwt")
+//         return res.redirect("/account/login")
+//       }
+//       res.locals.accountData = accountData
+//       account_type = res.locals.account_type
+//       res.locals.loggedin = 1
+//       next()
+//     })
+//   } else {
+//    next()
+//   }
+// }
+
 /* ****************************************
  *  Check Login
  * ************************************ */

@@ -158,6 +158,10 @@ nav ul li a:hover{
   text-align: center;
 }
 
+#logoutHeader{
+  padding-left: 20px;
+}
+
 footer{
   margin-top: 40px;
   text-align: left;

@@ -1,0 +1,39 @@
+<!-- A content heading -->
+<% if (title) { %>
+  <h1 class="bold" id="editAccountTitle"><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+} %>
+
+<form id="updateAccountForm" action="/account/edit-account" method="post">
+      
+  <label for="account_firstname" class="regular">First Name:*</label><br>
+  <input type="text" id="account_firstname" minlength="1" name="account_firstname" required placeholder="Min 1 character1" value="<%= locals.account_firstname %>"><br>
+
+  <label for="account_lastname" class="regular">Last Name:*</label><br>
+  <input type="text" id="account_lastname" minlength="1" name="account_lastname" required placeholder="Min 1 character" value="<%= locals.account_lastname %>"><br>
+
+  <label for="account_email" class="regular">Email:*</label><br>
+  <input type="email" class="regular" placeholder="Enter a valid email address" id="account_email" name="account_email" required value="<%= locals.account_email %>"><br>
+
+  <button type="submit" class="semi-bold" id="editAccountButton">Update Account</button>
+
+  <input type="hidden" name="account_id"
+  <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+  <% } %>>
+</form>
+
+<h1 class="bold" id="editAccountPasswordTitle">Update Password</h1> 
+<form id="updateAccountPasswordForm" action="/account/edit-account" method="post">
+  <label for="account_password" class="regular">First Name:*</label><br>
+  <p class="regular">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
+  <p class="regular">*note your original password will be changed</p>
+  <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
+  <input type="hidden" name="account_id"
+  <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+  <% } %>>
+
+  <button type="submit" class="semi-bold" id="editAccountPasswordButton">Change Password</button>
+</form>
+
+<script src="../../utilities/account-validation.js"></script>

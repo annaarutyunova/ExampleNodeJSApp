@@ -141,23 +141,21 @@ Util.checkJWTToken = (req, res, next) => {
 /* ****************************************
 * Middleware to check the account type
 // **************************************** */
-// Util.checkJWTToken = (req, res, next) => {
-//   if (req.cookies.jwt) {
-//     jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, function (err, accountData) { 
-//       if (err) {
-//         req.flash("Please log in") 
-//         res.clearCookie("jwt")
-//         return res.redirect("/account/login")
-//       }
-//       res.locals.accountData = accountData
-//       account_type = res.locals.account_type
-//       res.locals.loggedin = 1
-//       next()
-//     })
-//   } else {
-//    next()
-//   }
-// }
+Util.checkAccountType = (req, res, next) => {
+  // When not logged in you get redirected to the login page when trying to access /inv
+  if(res.locals.loggedin != 1){
+    req.flash("notice", "You are not authorized to access this page.")
+    res.status(403).redirect("/account/login")
+  }
+  const account_type = res.locals.accountData.account_type;
+  // Get account type from the payload which is accountData
+  if (account_type == 'Employee' || account_type == 'Admin') {
+    next() // where does it continue? what's the next step?
+  } else {
+    req.flash("notice", "You are not authorized to access this page.")
+    res.status(403).redirect("/account/login")
+  } 
+}
 
 /* ****************************************
  *  Check Login

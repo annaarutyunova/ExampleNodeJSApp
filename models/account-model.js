@@ -26,6 +26,19 @@ async function checkExistingEmail(account_email){
   }
 }
 
+/* **********************
+ *   Check if updated email matches emails of other accounts
+ * ********************* */
+async function checkMatchingEmails(account_email){
+  try {
+    const sql = "SELECT * FROM account WHERE account_email != $1"
+    const email = await pool.query(sql, [account_email])
+    return email.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 
 /* *****************************
@@ -42,6 +55,33 @@ async function getAccountByEmail (account_email) {
   }
 }
 
+/* *****************************
+* Return account data using account_id
+* ***************************** */
+async function getAccountDataById(account_id) {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email FROM account WHERE account_id = $1',
+      [account_id])
+    return result.rows[0]
+  } catch (error) {
+    return new Error("No matching account found")
+  }
+}
+
+/* *****************************
+* Update account data
+* ***************************** */
+async function updateAccountData(account_firstname, account_lastname, account_email, account_id){
+  try {
+    const sql = "UPDATE public.account SET account_firstname =  $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *"
+    return await pool.query(sql, [account_firstname, account_lastname, account_email, account_id])
+  } catch (error) {
+    return error.message
+  }
+}
 
 
-  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail};
+
+
+  module.exports = {registerAccount, checkExistingEmail, checkMatchingEmails, getAccountByEmail, getAccountDataById, updateAccountData};

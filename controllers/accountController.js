@@ -51,14 +51,12 @@ async function registerAccount(req, res) {
       errors: null,
     })
   }
-  
     const regResult = await accountModel.registerAccount(
       account_firstname,
       account_lastname,
       account_email,
       hashedPassword
     )
-  
     if (regResult) {
       req.flash(
         "success semi-bold",
@@ -87,6 +85,7 @@ async function accountLogin(req, res) {
  let nav = await utilities.getNav()
  const { account_email, account_password } = req.body
  const accountData = await accountModel.getAccountByEmail(account_email)
+ console.log(accountData)
  if (!accountData) {
   req.flash("notice", "Please check your credentials and try again.")
   res.status(400).render("account/login", {
@@ -122,6 +121,93 @@ async function buildAccountManagement(req, res) {
   })
 }
 
+// Build edit account view. GET
+async function buildEditAccountView(req, res) {
+  let nav = await utilities.getNav()
+  const account_id = parseInt(req.params.account_id)
+  const accountData = await accountModel.getAccountDataById(account_id)
+  res.render("account/edit-account", {
+    title: "Edit Account Infromation",
+    nav,
+    errors: null,
+    account_id: account_id,
+    account_firstname : accountData.account_firstname,
+    account_lastname : accountData.account_lastname,
+    account_email : accountData.account_email
+  })
+}
+
+// Update account info. POST
+async function updateAccountData(req, res) {
+  let nav = await utilities.getNav()
+  // const account_id = req.params.account_id
+  // const accountData = await accountModel.getAccountDataById(account_id)
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
+  const result = await accountModel.updateAccountData(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id)
+  if(result){
+    // Attempt to create a new jwt token when the data is updated
+  //   const data = await accountModel.getAccountDataById(res.locals.accountData.account_id)
+  // try {
+  // if (await bcrypt.compare(account_password, accountData.account_password)) {
+  //   delete accountData.account_password
+  //   const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+  //   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+  //   return res.redirect("/account/")
+  //   }
+  //  } catch (error) {
+  //   return new Error('Access Forbidden')
+  //  }
+   // The code above updates the jwt token by pulling the new updated info from the database and generating a new jwt.
+
+    req.flash(
+      "success semi-bold",
+      `The account was successfully updated.`
+    )
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the update failed. Please try again.")
+    res.status(501).render("./account/edit-account", {
+      title: "Edit Account Infromation",
+      nav,
+      errors: null,
+      account_id,
+      account_firstname,
+      account_firstname,
+      account_lastname,
+      account_email
+    })
+}
+}
+
+// Update account password. POST. No GET needed
+async function updateAccountPasswordData(req, res) {
+  let nav = await utilities.getNav()
+  const { account_id, account_password} = req.body
+  if(result){
+    req.flash(
+      "success semi-bold",
+      `The password was successfully changed.`
+    )
+    // Hash the password before storing
+    let hashedPassword
+    try{
+      hashedPassword = await bcrypt.hashSync(account_password, 10)
+    } catch(error){
+      req.flash("notice", "Sorry, the update failed. Please try again.")
+      res.status(501).render("./account/edit-account", {
+        title: "Edit Account Infromation",
+        nav,
+        errors: null,
+        account_id,
+        account_password
+      })
+    }
+}
+}
 
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData }

@@ -159,7 +159,7 @@ nav ul li a:hover{
 }
 
 #logoutHeader{
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 footer{
@@ -213,7 +213,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle{
   text-align: left;
   font-size: 1.5em;
 }
@@ -260,27 +260,35 @@ select{
   font-size: 1.1em;
 }
 
-#loginForm, #registerForm, #addClassForm, #addNewVehicleform, #deleteForm{
+#loginForm, #registerForm, #addClassForm, #addNewVehicleform, #deleteForm, #updateAccountPasswordForm{
   background-color: white;
   width: 100%;
   border: 2px solid maroon;
   box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
   padding: 20px;
-  
 }
 
-#loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input, #updateForm input, #deleteForm input{
+#updateAccountForm {
+  background-color: white;
+  width: 100%;
+  border: 2px solid maroon;
+  box-shadow: 5px 10px rgb(43, 45, 66, 0.2);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+#loginForm input, #registerForm input, #addClassForm input, #addNewVehicleform input, #updateForm input, #deleteForm input, #updateAccountForm input, #updateAccountPasswordForm input{
   height: 40px;
   margin: 7px 0 20px;
   font-size: 1.2em;
   width: 100%;
 }
 
-#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label, #updateForm label, #deleteForm label{
+#loginForm label, #registerForm label, #addClassForm label, #addNewVehicleform label, #updateForm label, #deleteForm label, #updateAccountForm label, #updateAccountPasswordForm label{
   text-align: left; 
 }
 
-#loginButton, #registerButton, #addClassButton, #addVehicleButton, #editVehicleButton, #deleteVehicleButton{
+#loginButton, #registerButton, #addClassButton, #addVehicleButton, #editVehicleButton, #deleteVehicleButton, #editAccountButton, #editAccountPasswordButton{
   background-color: maroon;
   color:white;
   border: none;

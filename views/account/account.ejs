@@ -5,10 +5,12 @@
       res.redirect('/')
     } %>
 
-<h2>Welcome <%-locals.accountData.account_firstname %></h2>
+<h2 class="semi-bold" id="welcome">Welcome <%-locals.accountData.account_firstname %></h2>
 <!-- A message -->
-<%- messages() %> 
-<p><a href="/">Edit account information</a></p>
+<%-  messages() %> 
+<!--The link must pass through the accounts router and be handled by the accounts controller. The id of the logged-in client should be passed through the link. -->
+<!-- I think in the link we pass locals.accountData.inv_id -->
+<p><a class="regular" href="/account/edit-account/<%-locals.accountData.account_id %>">Edit account information</a></p>
 
 
 <% if (errors) { %>
@@ -22,6 +24,6 @@
 
 <!-- Assignment 5 -->
 <% if(locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin' ){  %>
-    <h2>Inventory Management</h2>
-    <p><a href="/inv">Manage Inventory</a></p>
+    <h3 class="semi-bold">Inventory Management</h3>
+    <p><a class="regular" href="/inv">Manage Inventory</a></p>
 <% } %>

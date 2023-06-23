@@ -182,7 +182,6 @@ invCont.getInventoryJSON = async (req, res, next) => {
 // Activity 5 GET build the update view
 invCont.editInventoryView = async function(req, res) {
   const inv_id = parseInt(req.params.inv_id)
-  console.log(inv_id)
   let nav = await utilities.getNav()
   const itemData = await invModel.getInventoryByInvId(inv_id)
   const classificationData = await invModel.getClassifications()
@@ -213,48 +212,48 @@ invCont.updateInventory = async function(req, res) {
   const classificationData = await invModel.getClassifications()
   let select = await utilities.selectClassification(classificationData.rows)
   const { inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, 
-    inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
-    const updateResult = await invModel.updateInventory(
+  inv_price, inv_year, inv_miles, inv_color, classification_id} = req.body
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    classification_id
+  )
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model
+    req.flash(
+      "success semi-bold",
+      `The ${itemName} was successfully updated.`
+    )
+    res.redirect("/inv/")
+  } else {
+    const itemName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("./inventory/edit-inventory", {
+      title: "Edit" + itemName,
+      nav,
+      select: select,
+      errors: null,
       inv_id,
-      inv_make, 
-      inv_model, 
-      inv_description, 
-      inv_image, 
-      inv_thumbnail, 
-      inv_price, 
-      inv_year, 
-      inv_miles, 
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
       inv_color,
       classification_id
-    )
-    if (updateResult) {
-      const itemName = updateResult.inv_make + " " + updateResult.inv_model
-      req.flash(
-        "success semi-bold",
-        `The ${itemName} was successfully updated.`
-      )
-      res.redirect("/inv/")
-    } else {
-      const itemName = `${inv_make} ${inv_model}`
-      req.flash("notice", "Sorry, the insert failed.")
-      res.status(501).render("./inventory/edit-inventory", {
-        title: "Edit" + itemName,
-        nav,
-        select: select,
-        errors: null,
-        inv_id,
-        inv_make,
-        inv_model,
-        inv_year,
-        inv_description,
-        inv_image,
-        inv_thumbnail,
-        inv_price,
-        inv_miles,
-        inv_color,
-        classification_id
-      })
-    }
+    })
+  }
 }
 
 // Activity 5. Build the confirm deletion view. confirmDeleteInventoryView

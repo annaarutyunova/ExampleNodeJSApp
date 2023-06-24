@@ -33,16 +33,17 @@ router.post(
 // Add a default route for accounts.
 router.get("/", utilities.checkLogin , utilities.handleErrors(accountController.buildAccountManagement))
 
-router.get("/edit-account/:account_id", utilities.handleErrors(accountController.buildEditAccountView))
-
 router.post("/edit-account/", 
 regValidate.updateAccountRules(),
 regValidate.checkAccountData,
 utilities.handleErrors(accountController.updateAccountData))
 
-// router.post("/edit-account/", 
-// regValidate.updateAccountPasswordRules(),
-// utilities.handleErrors(accountController.updateAccountPasswordData))
+router.post("/edit-password/", 
+regValidate.updateAccountPasswordRules(),
+regValidate.checkPassword,
+utilities.handleErrors(accountController.updateAccountPasswordData))
+
+router.get("/edit-account/:account_id", utilities.handleErrors(accountController.buildEditAccountView))
 
 
 module.exports = router

@@ -53,7 +53,7 @@ app.use(utilities.checkJWTToken)
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
-app.get('/clear-cookie', (req,res) => {
+app.get('/clear-cookie', (req, res) => {
   res.clearCookie('jwt');
   res.redirect('/')
 })

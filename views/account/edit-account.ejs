@@ -5,10 +5,18 @@
     res.redirect('/')
 } %>
 
+<% if (errors) { %>
+  <ul class="notice semi-bold">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
 <form id="updateAccountForm" action="/account/edit-account" method="post">
       
   <label for="account_firstname" class="regular">First Name:*</label><br>
-  <input type="text" id="account_firstname" minlength="1" name="account_firstname" required placeholder="Min 1 character1" value="<%= locals.account_firstname %>"><br>
+  <input type="text" id="account_firstname" minlength="1" name="account_firstname" required placeholder="Min 1 character" value="<%= locals.account_firstname %>"><br>
 
   <label for="account_lastname" class="regular">Last Name:*</label><br>
   <input type="text" id="account_lastname" minlength="1" name="account_lastname" required placeholder="Min 1 character" value="<%= locals.account_lastname %>"><br>
@@ -24,7 +32,7 @@
 </form>
 
 <h1 class="bold" id="editAccountPasswordTitle">Update Password</h1> 
-<form id="updateAccountPasswordForm" action="/account/edit-account" method="post">
+<form id="updateAccountPasswordForm" action="/account/edit-password" method="post">
   <label for="account_password" class="regular">First Name:*</label><br>
   <p class="regular">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
   <p class="regular">*note your original password will be changed</p>
@@ -36,4 +44,4 @@
   <button type="submit" class="semi-bold" id="editAccountPasswordButton">Change Password</button>
 </form>
 
-<script src="../../utilities/account-validation.js"></script>
+<!-- <script src="../../utilities/account-validation.js"></script> -->

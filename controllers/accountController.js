@@ -102,6 +102,14 @@ async function accountLogin(req, res) {
   const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
   return res.redirect("/account/")
+  } else {
+    req.flash("notice", "Check your credentials")
+    res.status(400).render("account/login", {
+      title: "Login",
+      nav,
+      errors:null,
+      account_email,
+    })
   }
  } catch (error) {
   return new Error('Access Forbidden')
@@ -143,42 +151,31 @@ async function updateAccountData(req, res) {
   // const account_id = req.params.account_id
   // const accountData = await accountModel.getAccountDataById(account_id)
   const { account_firstname, account_lastname, account_email, account_id } = req.body
+  console.log(`updateAccountData in accountController ${account_id}`)
   const result = await accountModel.updateAccountData(
     account_firstname,
     account_lastname,
     account_email,
     account_id)
+    const accountData = await accountModel.getAccountDataById(account_id)
   if(result){
-    // Attempt to create a new jwt token when the data is updated
-  //   const data = await accountModel.getAccountDataById(res.locals.accountData.account_id)
-  // try {
-  // if (await bcrypt.compare(account_password, accountData.account_password)) {
-  //   delete accountData.account_password
-  //   const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-  //   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-  //   return res.redirect("/account/")
-  //   }
-  //  } catch (error) {
-  //   return new Error('Access Forbidden')
-  //  }
-   // The code above updates the jwt token by pulling the new updated info from the database and generating a new jwt.
-
-    req.flash(
-      "success semi-bold",
-      `The account was successfully updated.`
-    )
-    res.redirect("/account/")
+  try {
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    return req.flash("success", "The account was updated"), res.redirect("/account/")
+    } catch (error) {
+    return new Error('Access Forbidden')
+   }
   } else {
     req.flash("notice", "Sorry, the update failed. Please try again.")
-    res.status(501).render("./account/edit-account", {
+    res.status(501).render(`/account/edit-account/:${account_id}`, {
       title: "Edit Account Infromation",
       nav,
       errors: null,
-      account_id,
-      account_firstname,
-      account_firstname,
-      account_lastname,
-      account_email
+      account_id : account_id,
+      account_firstname: account_firstname,
+      account_lastname: account_lastname,
+      account_email: account_email,
     })
 }
 }
@@ -187,27 +184,33 @@ async function updateAccountData(req, res) {
 async function updateAccountPasswordData(req, res) {
   let nav = await utilities.getNav()
   const { account_id, account_password} = req.body
-  if(result){
-    req.flash(
-      "success semi-bold",
-      `The password was successfully changed.`
-    )
-    // Hash the password before storing
-    let hashedPassword
+  // Hash before storing
+  let hashedPassword = await bcrypt.hashSync(account_password, 10)
+  console.log(hashedPassword)
+  const accountPassword = await accountModel.updatePassword(hashedPassword, account_id)
+  const accountData = await accountModel.getAccountDataById(account_id)
+  if(accountPassword){
     try{
-      hashedPassword = await bcrypt.hashSync(account_password, 10)
-    } catch(error){
-      req.flash("notice", "Sorry, the update failed. Please try again.")
-      res.status(501).render("./account/edit-account", {
-        title: "Edit Account Infromation",
+      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+      return req.flash("success", "The account password was updated"), res.redirect("/account/")
+      } catch (error) {
+      return new Error('Access Forbidden')
+    }
+    } else {
+      req.flash("notice", "Sorry, the change of password failed.")
+      res.status(501).render(`account/edit-account/:${account_id}`, {
+        title: "Edit Account Information",
         nav,
         errors: null,
-        account_id,
-        account_password
+        account_id: account_id,
+        account_firstname: account_firstname,
+        account_lastname: account_lastname,
+        account_email: account_email,
       })
     }
 }
-}
+
 
   
   module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData }

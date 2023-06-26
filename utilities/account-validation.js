@@ -147,26 +147,29 @@ validate.checkLoginData = async (req, res, next) => {
   // })
       .custom(async (account_email, {req}) => {
         const account_id = req.body.account_id
-        const account = await accountModel.getAccountDataById(req.body.account_id)
+        // const account = await accountModel.getAccountDataById(req.body.account_id)
+        const account = await accountModel.getAccountDataById(account_id)
+        console.log(account_id)
+        const emailExists = await accountModel.checkExistingEmail(account_email)
         console.log(account)
         console.log(`In validation: ${account.account_id}`)
         // Check if submitted email is same as existing
-        if (account_email != account.account_email) {
+        if (emailExists && account_email !== account.account_email) {
           console.log({account_email})
           console.log({aae: account.account_email})
           // No - Check if email exists in table
-          const emailExists = await accountModel.checkExistingEmail(account_email)
+          // const emailExists = await accountModel.checkExistingEmail(account_email)
           // Yes - throw error
-          if (emailExists == 1) {
+          // if (emailExists == 1) {
           throw new Error("Email exists. Please login or use different email")
-          }
+          // }
         }
       })     
   ]
   }
 
  validate.checkAccountData = async (req, res, next) => {
-    const { account_firstname, account_lastname, account_email } = req.body
+    const { account_id, account_firstname, account_lastname, account_email } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -175,6 +178,7 @@ validate.checkLoginData = async (req, res, next) => {
         errors,
         title: "Edit Account Information",
         nav,
+        account_id: account_id,
         account_firstname: account_firstname,
         account_lastname: account_lastname,
         account_email: account_email,

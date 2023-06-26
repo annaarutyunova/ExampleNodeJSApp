@@ -162,13 +162,13 @@ async function updateAccountData(req, res) {
   try {
     const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-    return req.flash("success", "The account was updated"), res.redirect("/account/")
+    return req.flash("success semi-bold", "The account was updated"), res.redirect("/account/")
     } catch (error) {
     return new Error('Access Forbidden')
    }
   } else {
     req.flash("notice", "Sorry, the update failed. Please try again.")
-    res.status(501).render(`/account/edit-account/:${account_id}`, {
+    res.status(501).render(`/account/edit-account`, {
       title: "Edit Account Infromation",
       nav,
       errors: null,

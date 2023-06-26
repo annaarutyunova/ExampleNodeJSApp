@@ -33,7 +33,7 @@
 
 <h1 class="bold" id="editAccountPasswordTitle">Update Password</h1> 
 <form id="updateAccountPasswordForm" action="/account/edit-password" method="post">
-  <label for="account_password" class="regular">First Name:*</label><br>
+  <label for="account_password" class="regular">Password:*</label><br>
   <p class="regular">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
   <p class="regular">*note your original password will be changed</p>
   <input type="password" id="account_password" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>

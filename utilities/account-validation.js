@@ -146,7 +146,7 @@ validate.checkLoginData = async (req, res, next) => {
   //     }
   // })
       .custom(async (account_email, {req}) => {
-        // const account_id = req.locals.accountData.account_id
+        const account_id = req.body.account_id
         const account = await accountModel.getAccountDataById(req.body.account_id)
         console.log(account)
         console.log(`In validation: ${account.account_id}`)

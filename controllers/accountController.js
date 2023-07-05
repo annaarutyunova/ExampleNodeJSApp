@@ -212,5 +212,49 @@ async function updateAccountPasswordData(req, res) {
 }
 
 
+// Build Inbox View
+async function buildInboxView(req, res) {
+  let nav = await utilities.getNav()
+  let firstname = res.locals.accountData.account_firstname
+  let lastname = res.locals.accountData.account_lastname
+  const account_id = req.params.account_id
+  const inboxData = await accountModel.getMessageFromAccountId(account_id)
+  console.log(account_id)
+  console.log("Inbox Data" + inboxData.rows)
+  const table = await utilities.buildInbox(inboxData)
+  console.log(table)
+  res.render(`account/inbox`, {
+    title: firstname + " " + lastname + " " +  "Inbox",
+    nav,
+    errors: null,
+    account_id: account_id,
+    account_firstname : firstname,
+    account_lastname : lastname,
+    table
+  })
+}
+
+// Build Message View
+async function buildMessageView(req, res) {
+  let nav = await utilities.getNav()
+  // let firstname = res.locals.accountData.account_firstname
+  // let lastname = res.locals.accountData.account_lastname
+  // const account_id = req.params.account_id
+  const message_id = req.params.message_id
+  const messageInfo = await accountModel.getMessageByMessageId(message_id)
+  const div = await utilities.buildMessage(messageInfo)
+  console.log("Div" + div)
+  console.log("message_id = " + message_id)
+  console.log("messageInfo is " + messageInfo[0].message_body)
+  res.render(`./account/message`, {
+    title: "View Message",
+    nav,
+    errors: null,
+    div,
+    message_id: message_id,
+    
+  })
+}
+
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData, buildInboxView, buildMessageView}

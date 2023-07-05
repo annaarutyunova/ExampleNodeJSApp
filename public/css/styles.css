@@ -213,7 +213,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle, #inboxTitle{
   text-align: left;
   font-size: 1.5em;
 }
@@ -301,27 +301,26 @@ select{
   margin-bottom: 0;
 }
 
-table{
+#inventoryDisplay{
   margin-top: 20px;
   width: 100%;
   line-height: 3em;
 }
 
-td a{
+#inventoryDisplay td a{
   color:black;
 }
-tbody, th, td{
+#inventoryDisplay tbody, th, td{
   border-bottom: 1px solid black;
-  /* padding-left:  5px; */
 }
-thead{
+#inventoryDisplay thead{
   background-color: burlywood;
   text-align:left;
 }
-tr th{
-  /* padding-left: 5px; */
-}
 
+.message p{
+  margin: 0;
+}
 
 
 

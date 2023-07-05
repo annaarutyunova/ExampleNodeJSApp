@@ -1,0 +1,16 @@
+<!-- Header -->
+<% if (title) { %>
+    <h1 class="bold" id="messageTitle"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<% if (errors) { %>
+    <ul class="notice semi-bold">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+  
+<%- div %>

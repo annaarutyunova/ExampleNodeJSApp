@@ -21,6 +21,14 @@
  </ul>
 <% } %>
 
+<!-- Add Message Center. Not dependent on the account type. -->
+<h3 class="semi-bold">Message Center</h3>
+<ul>
+  <li class="regular">This should say how many unread messages you have.
+    <!-- <a class="regular" href="/account/message"></a> -->
+  </li>
+  <li class="regular">Go to <a class="regular" href="/account/inbox/<%-locals.accountData.account_id %>" id="inbox">inbox</a></li>
+</ul>
 
 <!-- Assignment 5 -->
 <% if(locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin' ){  %>

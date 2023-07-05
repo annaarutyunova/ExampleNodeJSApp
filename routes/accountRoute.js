@@ -46,4 +46,11 @@ utilities.handleErrors(accountController.updateAccountPasswordData))
 router.get("/edit-account/:account_id", utilities.handleErrors(accountController.buildEditAccountView))
 
 
+// Deliver inbox view
+router.get("/inbox/:account_id", utilities.handleErrors(accountController.buildInboxView))
+
+// Deliver message view
+router.get("/inbox/message/:message_id", utilities.handleErrors(accountController.buildMessageView))
+
+
 module.exports = router

@@ -1,0 +1,22 @@
+<!-- Header -->
+<% if (title) { %>
+    <h1 class="bold" id="inboxTitle"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<!-- Enable display errors -->
+<% if (errors) { %>
+    <ul class="notice semi-bold">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<ul class="regular">
+  <li><a href="#">Create New Message</a></li>
+  <li><a href="#">View Archived Messages. Need to pull the number of archived messages.</a></li>  
+</ul>
+
+<%- table %>

@@ -143,18 +143,19 @@ Util.checkJWTToken = (req, res, next) => {
 // **************************************** */
 Util.checkAccountType = (req, res, next) => {
   // When not logged in you get redirected to the login page when trying to access /inv
-  if(res.locals.loggedin != 1){
-    req.flash("notice", "You are not authorized to access this page.")
-    res.status(403).redirect("/account/login")
-  }
-  const account_type = res.locals.accountData.account_type;
+  if(res.locals.loggedin){
+    const account_type = res.locals.accountData.account_type;
   // Get account type from the payload which is accountData
-  if (account_type == 'Employee' || account_type == 'Admin') {
-    next() // where does it continue? what's the next step?
+    if (account_type == 'Employee' || account_type == 'Admin') {
+      next() // where does it continue? what's the next step?
   } else {
     req.flash("notice", "You are not authorized to access this page.")
     res.status(403).redirect("/account/login")
   } 
+} else {
+  req.flash("notice", "You are not authorized to access this page.")
+    res.status(403).redirect("/account/login")
+  }
 }
 
 /* ****************************************
@@ -168,5 +169,38 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+// Build the message table
+Util.buildInbox = async function(data) {
+  let table = '<table>'
+  // Set up the table labels 
+  let dataTable = '<thead class="semi-bold">'; 
+  dataTable += '<tr><th>Received</th><th>Subject</th><th>From</th><th>Read</th></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody class="regular">'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (message) { 
+  //  console.log(message.inv_id + ", " + message.inv_model); 
+   dataTable += `<tr><td>${message.message_created}</td>`; 
+   dataTable += `<td><a href='/account/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
+   dataTable += `<td>${message.account_firstname} ${message.account_lastname}</td>`; 
+   dataTable += `<td>${message.message_read}</td></tr>`;  
+  }) 
+  dataTable += '</tbody></table>'; 
+  // Display the contents in the Inventory Management view 
+  return table += dataTable;
+}
+
+// Build the individual message view
+Util.buildMessage = async function(data) {
+  // Set up the table labels 
+  let div = `<div class="message">`; 
+   div += `<p class="regular"><strong>Subject:</strong> ${data[0].message_subject}</p><br>`; 
+   div += `<p class="regular"><strong>From:</strong> ${data[0].account_firstname} ${data[0].account_lastname}</p><br>`; 
+   div += `<p class="regular"><strong>Message:</strong></p><br><p class="regular">${data[0].message_body}</p></div>`;  
+  return div;
+}
+
 
 module.exports = Util;

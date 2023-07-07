@@ -213,7 +213,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle, #inboxTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle, #inboxTitle, #messageTitle{
   text-align: left;
   font-size: 1.5em;
 }
@@ -322,6 +322,28 @@ select{
   margin: 0;
 }
 
+#messageActions{
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid black;
+}
+
+#messageActions a{
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid black;
+  color: black;
+  margin-top: 20px;
+  background-color: rgb(220,220,220)
+}
+#messageActions a:hover{
+  background-color: white;
+}
+#inboxOptions li{
+  line-height: 1.6em;
+}
+
+
 
 
 /********** Large View **********/
@@ -331,6 +353,7 @@ select{
   }
   body{
     border: 3px solid maroon;
+
   }
   nav, footer, header, main{
     padding: 0 10px;

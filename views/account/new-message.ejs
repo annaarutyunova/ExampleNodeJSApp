@@ -1,0 +1,32 @@
+  <!-- Header -->
+<% if (title) { %>
+    <h1 class="bold" id="newMessageTitle"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<% if (errors) { %>
+    <ul class="notice semi-bold">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+  <%-messages %>
+  
+  <form id="newMessageForm" action="/account/new-message" method="post">
+
+    <label for="message_subject" class="regular">Subject:*</label><br>
+    <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%= locals.message_subject %>"><br>
+      
+    <label for="message_body" class="regular">Message:*</label><br>
+    <input type="text" id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character" value="<%= locals.message_body %>"><br>
+  
+    <button type="submit" class="semi-bold" id="newMessageButton">Send</button>
+  
+    <input type="hidden" name="message_id"
+    <% if(locals.message_id) { %> value="<%= locals.message_id %>"
+    <% } %>>
+  </form>
+  

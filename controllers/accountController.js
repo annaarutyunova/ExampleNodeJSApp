@@ -220,7 +220,6 @@ async function buildInboxView(req, res) {
   const account_id = req.params.account_id
   const inboxData = await accountModel.getMessageFromAccountId(account_id)
   console.log(account_id)
-  console.log("Inbox Data" + inboxData.rows)
   const table = await utilities.buildInbox(inboxData)
   console.log(table)
   res.render(`account/inbox`, {
@@ -252,9 +251,35 @@ async function buildMessageView(req, res) {
     errors: null,
     div,
     message_id: message_id,
-    
   })
 }
 
+// Build Reply View
+async function buildReplyView(req, res) {
+  let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+  const messageInfo = await accountModel.getMessageByMessageId(message_id)
+  const div = await utilities.buildMessage(messageInfo)
+  console.log("Div" + div)
+  console.log("message_id = " + message_id)
+  console.log("messageInfo is " + messageInfo[0].message_body)
+  res.render(`./account/reply`, {
+    title: "Reply Message",
+    nav,
+    errors: null,
+    div,
+    message_id: message_id,
+  })
+}
+
+// Build Create New Message View
+async function createNewMessageView(req, res){
+  let nav = await utilities.getNav()
+  res.render(`account/new-message`,{
+    title: "New Message",
+    nav,
+    errors: null,
+  })
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData, buildInboxView, buildMessageView}
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement, buildEditAccountView, updateAccountData, updateAccountPasswordData, buildInboxView, buildMessageView, buildReplyView, createNewMessageView}

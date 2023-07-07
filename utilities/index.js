@@ -196,11 +196,13 @@ Util.buildInbox = async function(data) {
 Util.buildMessage = async function(data) {
   // Set up the table labels 
   let div = `<div class="message">`; 
-   div += `<p class="regular"><strong>Subject:</strong> ${data[0].message_subject}</p><br>`; 
-   div += `<p class="regular"><strong>From:</strong> ${data[0].account_firstname} ${data[0].account_lastname}</p><br>`; 
-   div += `<p class="regular"><strong>Message:</strong></p><br><p class="regular">${data[0].message_body}</p></div>`;  
+   div += `<p class="regular"><strong><u>Subject:</u></strong> ${data[0].message_subject}</p><br>`; 
+   div += `<p class="regular"><strong><u>From:</u></strong> ${data[0].account_firstname} ${data[0].account_lastname}</p><br>`; 
+   div += `<p class="regular"><strong><u>Message:</u></strong></p><br><p class="regular">${data[0].message_body}</p></div>`;  
   return div;
 }
+
+// Build reply view
 
 
 module.exports = Util;

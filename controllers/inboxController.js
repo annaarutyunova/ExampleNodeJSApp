@@ -13,10 +13,10 @@ async function buildInboxView(req, res) {
     let firstname = res.locals.accountData.account_firstname
     let lastname = res.locals.accountData.account_lastname
     const account_id = req.params.account_id
+    console.log("Account_id parameter is", account_id)
     const inboxData = await inboxModel.getMessageFromAccountId(account_id)
     console.log('hi'+inboxData)
     const table = await utilities.buildInbox(inboxData)
-    // console.log(table)
     res.render(`inbox/inbox`, {
       title: firstname + " " + lastname + " " +  "Inbox",
       nav,

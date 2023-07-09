@@ -3,7 +3,7 @@ const pool = require("../database/")
 // Return data from the join between message and account tables for the inbox.
 async function getMessageFromAccountId(account_id) {
     try {
-      console.log(`Account ID in account Model ${account_id}`)
+      console.log(`Account ID in inbox Model ${account_id}`)
       const result = await pool.query(
         "SELECT message_id, message_subject, message_body, TO_CHAR(message_created, 'YYYY-MM-DD HH24:MI:SS') AS message_created, message_to, message_from, message_read, message_archived, account_firstname, account_lastname FROM public.account JOIN public.message ON account_id = message_to WHERE message_to = $1",
         [account_id])
@@ -30,6 +30,6 @@ async function getMessageFromAccountId(account_id) {
   async function getAccountId(){
       return await pool.query("SELECT account_id, account_email FROM public.account ORDER BY account_email")
   }
-  
+
   
     module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId};

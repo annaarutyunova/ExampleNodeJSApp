@@ -15,6 +15,6 @@ router.get("/message/:message_id", utilities.handleErrors(inboxController.buildM
 router.get("/message/reply/:message_id", utilities.handleErrors(inboxController.buildReplyView))
 
 // Deliver create new message view
-router.get("/create-message", utilities.handleErrors(inboxController.createNewMessageView))
+router.get("/create-message/:account_id", utilities.handleErrors(inboxController.createNewMessageView))
 
 module.exports = router

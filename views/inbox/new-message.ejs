@@ -12,17 +12,16 @@
   <%  }) %>
    </ul>
   <% } %>
-
-  <%#-messages %>
   
   
   <form id="newMessageForm" action="/account/new-message" method="post">
-    <%#- select %>
+    <label for="account_email" class="regular">To:</label><br>
+    <%- select %>
     <label for="message_subject" class="regular">Subject:*</label><br>
     <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%= locals.message_subject %>"><br>
       
     <label for="message_body" class="regular">Message:*</label><br>
-    <input type="text" id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character" value="<%= locals.message_body %>"><br>
+    <textarea id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character"><%= locals.message_body %></textarea><br>
   
     <button type="submit" class="semi-bold" id="newMessageButton">Send</button>
   

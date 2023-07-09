@@ -70,11 +70,11 @@ async function buildInboxView(req, res) {
   // Build Create New Message View
   async function createNewMessageView(req, res){
     let nav = await utilities.getNav()
-    // let select = await utilities.selectEmail()
+    let select = await utilities.selectEmail()
     res.render('./inbox/new-message',{
       title: "New Message",
       nav,
-    //   select,
+      select,
       errors: null,
     })
 }

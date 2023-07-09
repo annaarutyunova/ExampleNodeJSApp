@@ -2,6 +2,7 @@ const invModel = require("../models/inventory-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+const inboxModel = require("../models/inbox-model")
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -203,16 +204,16 @@ Util.buildMessage = async function(data) {
 }
 
 Util.selectEmail = async function(optionSelected){
-  const emails = await accountModel.getAccountId()
+  const emails = await inboxModel.getAccountId()
   console.log(emails)
   let select = "<select name='account_email' class='semi-bold' id='account_email'>"
   let option = "<option value=''>Send to</option>"
   emails.rows.forEach((row) => {
     option += `<option value = "${row.account_id}" ${row.account_id === Number(optionSelected)? "selected": ""}
-    > ${row.classification_name} </option> `
+    > ${row.account_email} </option> `
   })
   select += option
-  select += "</select>"
+  select += "</select><br>"
   return select
 }
 

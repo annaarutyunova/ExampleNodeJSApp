@@ -1,6 +1,6 @@
 <!-- Header -->
 <% if (title) { %>
-    <h1 class="bold" id="replyTitle"><%= title %></h1>
+    <h1 class="bold" id="messageTitle"><%= title %></h1>
     <% } else {
       res.redirect('/')
     } %>
@@ -16,8 +16,9 @@
 <%- div %>
 
 <div class="regular" id="messageActions">
-<a href="/account/inbox/message/reply">Reply</a><br><br>
+<a href="/inbox/message/reply/<%-message_id %>">Reply</a><br><br>
 <a href="">Mark as Read</a><br><br>
 <a href="">Archive Message</a><br><br>
 <a href="">Delete Message</a><br><br>
 </div>
+<a class="regular" id="returnToInbox" href="/inbox/<%-locals.accountData.account_id %>">Return to Inbox</a><br><br>

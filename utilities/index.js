@@ -180,10 +180,10 @@ Util.buildInbox = async function(data) {
   // Set up the table body 
   dataTable += '<tbody class="regular">'; 
   // Iterate over all vehicles in the array and put each in a row 
-  data.forEach(function (message) { 
+   data.forEach(function (message) {
   //  console.log(message.inv_id + ", " + message.inv_model); 
    dataTable += `<tr><td>${message.message_created}</td>`; 
-   dataTable += `<td><a href='/account/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
+   dataTable += `<td><a href='/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
    dataTable += `<td>${message.account_firstname} ${message.account_lastname}</td>`; 
    dataTable += `<td>${message.message_read}</td></tr>`;  
   }) 
@@ -202,7 +202,21 @@ Util.buildMessage = async function(data) {
   return div;
 }
 
-// Build reply view
+Util.selectEmail = async function(optionSelected){
+  const emails = await accountModel.getAccountId()
+  console.log(emails)
+  let select = "<select name='account_email' class='semi-bold' id='account_email'>"
+  let option = "<option value=''>Send to</option>"
+  emails.rows.forEach((row) => {
+    option += `<option value = "${row.account_id}" ${row.account_id === Number(optionSelected)? "selected": ""}
+    > ${row.classification_name} </option> `
+  })
+  select += option
+  select += "</select>"
+  return select
+}
+
+
 
 
 module.exports = Util;

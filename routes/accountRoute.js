@@ -46,16 +46,16 @@ utilities.handleErrors(accountController.updateAccountPasswordData))
 router.get("/edit-account/:account_id", utilities.handleErrors(accountController.buildEditAccountView))
 
 
-// Deliver inbox view
-router.get("/inbox/:account_id", utilities.handleErrors(accountController.buildInboxView))
+// // Deliver inbox view
+// router.get("/inbox/:account_id", utilities.handleErrors(accountController.buildInboxView))
 
-// Deliver message view
-router.get("/inbox/message/:message_id", utilities.handleErrors(accountController.buildMessageView))
+// // Deliver message view
+// router.get("/inbox/message/:message_id", utilities.handleErrors(accountController.buildMessageView))
 
-// Deliver reply message view
-router.get("/inbox/message/reply/:message_id", utilities.handleErrors(accountController.buildReplyView))
+// // Deliver reply message view
+// router.get("/inbox/message/reply/:message_id", utilities.handleErrors(accountController.buildReplyView))
 
-// Deliver create new message view
-router.get("/inbox/new-message", utilities.handleErrors(accountController.createNewMessageView))
+// // Deliver create new message view
+// router.get("/inbox/new-message", utilities.handleErrors(accountController.createNewMessageView))
 
 module.exports = router

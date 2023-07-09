@@ -149,14 +149,9 @@ validate.checkLoginData = async (req, res, next) => {
         const account_id = req.body.account_id
         // const account = await accountModel.getAccountDataById(req.body.account_id)
         const account = await accountModel.getAccountDataById(account_id)
-        console.log(account_id)
         const emailExists = await accountModel.checkExistingEmail(account_email)
-        console.log(account)
-        console.log(`In validation: ${account.account_id}`)
         // Check if submitted email is same as existing
         if (emailExists && account_email !== account.account_email) {
-          console.log({account_email})
-          console.log({aae: account.account_email})
           // No - Check if email exists in table
           // const emailExists = await accountModel.checkExistingEmail(account_email)
           // Yes - throw error

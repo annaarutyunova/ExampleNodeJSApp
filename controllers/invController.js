@@ -259,7 +259,6 @@ invCont.updateInventory = async function(req, res) {
 // Activity 5. Build the confirm deletion view. confirmDeleteInventoryView
 invCont.confirmDeleteInventoryView = async function(req, res) {
   const inv_id = parseInt(req.params.inv_id)
-  console.log(inv_id)
   let nav = await utilities.getNav()
   const itemData = await invModel.getInventoryByInvId(inv_id)
   const classificationData = await invModel.getClassifications()

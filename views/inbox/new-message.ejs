@@ -15,8 +15,9 @@
 
   <%-messages %>
   
+  
   <form id="newMessageForm" action="/account/new-message" method="post">
-
+    <%#- select %>
     <label for="message_subject" class="regular">Subject:*</label><br>
     <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%= locals.message_subject %>"><br>
       

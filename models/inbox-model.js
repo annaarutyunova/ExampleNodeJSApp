@@ -17,7 +17,7 @@ async function getMessageFromAccountId(account_id) {
 async function getMessageByMessageId(message_id) {
     try {
         const result = await pool.query(
-        "SELECT message_id, message_subject, message_body, TO_CHAR(message_created, 'YYYY-MM-DD HH24:MI:SS') AS message_created, message_to, message_from, message_read, message_archived, account_firstname, account_lastname FROM public.message JOIN public.account ON message_from = account_id WHERE message_id = $1",
+        "SELECT message_id, message_subject, message_body, TO_CHAR(message_created, 'YYYY-MM-DD HH24:MI:SS') AS message_created, message_to, message_from, message_read, message_archived, account_firstname, account_lastname, account_email FROM public.message JOIN public.account ON message_from = account_id WHERE message_id = $1",
         [message_id])
         return result.rows
     } catch (error) {
@@ -26,7 +26,7 @@ async function getMessageByMessageId(message_id) {
 }
 
 async function getAccountId(){
-    return await pool.query("SELECT account_id, account_email FROM public.account ORDER BY account_email")
+    return await pool.query("SELECT account_id, account_email, account_firstname, account_lastname FROM public.account ORDER BY account_email")
 }
 
 async function sendMessage(

@@ -260,7 +260,7 @@ select{
   font-size: 1.1em;
 }
 
-#loginForm, #registerForm, #addClassForm, #addNewVehicleform, #deleteForm, #updateAccountPasswordForm{
+#loginForm, #registerForm, #addClassForm, #addNewVehicleform, #deleteForm, #updateAccountPasswordForm, #newMessageForm{
   background-color: white;
   width: 100%;
   border: 2px solid maroon;
@@ -342,8 +342,8 @@ select{
 #inboxOptions li{
   line-height: 1.6em;
 }
-#returnToInbox{
-  
+#reply_message_body{
+  vertical-align: bottom;
 }
 
 

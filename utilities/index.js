@@ -205,12 +205,13 @@ Util.buildMessage = async function(data) {
 
 Util.selectEmail = async function(optionSelected){
   const emails = await inboxModel.getAccountId()
-  console.log(emails)
-  let select = "<select name='account_email' class='semi-bold' id='account_email'>"
+  let select = "<select name='account_id' class='semi-bold' id='account_id'>"
   let option = "<option value=''>Send to</option>"
   emails.rows.forEach((row) => {
     option += `<option value = "${row.account_id}" ${row.account_id === Number(optionSelected)? "selected": ""}
     > ${row.account_email} </option> `
+    console.log("Stupid accoutnid", row.account_id)
+    console.log("option selected", optionSelected)
   })
   select += option
   select += "</select><br>"

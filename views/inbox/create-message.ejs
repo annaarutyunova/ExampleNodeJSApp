@@ -12,10 +12,12 @@
   <%  }) %>
    </ul>
   <% } %>
+
+  <%-messages()%>
   
   
-  <form id="newMessageForm" action="/account/new-message" method="post">
-    <label for="account_email" class="regular">To:</label><br>
+  <form id="newMessageForm" action="/inbox/create-message" method="post">
+    <label for="account_id" class="regular">To:</label><br>
     <%- select %>
     <label for="message_subject" class="regular">Subject:*</label><br>
     <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%= locals.message_subject %>"><br>
@@ -25,8 +27,6 @@
   
     <button type="submit" class="semi-bold" id="newMessageButton">Send</button>
   
-    <input type="hidden" name="message_id"
-    <% if(locals.message_id) { %> value="<%= locals.message_id %>"
-    <% } %>>
+   
   </form>
   

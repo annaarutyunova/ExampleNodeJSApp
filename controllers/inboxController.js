@@ -13,9 +13,7 @@ async function buildInboxView(req, res) {
     let firstname = res.locals.accountData.account_firstname
     let lastname = res.locals.accountData.account_lastname
     const account_id = req.params.account_id
-    console.log("Account_id parameter is", account_id)
     const inboxData = await inboxModel.getMessageFromAccountId(account_id)
-    console.log('hi'+inboxData)
     const table = await utilities.buildInbox(inboxData)
     res.render(`inbox/inbox`, {
       title: firstname + " " + lastname + " " +  "Inbox",
@@ -37,11 +35,10 @@ async function buildInboxView(req, res) {
     const message_id = req.params.message_id
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
     const div = await utilities.buildMessage(messageInfo)
-    // console.log("Div" + div)
-    // console.log("message_id = " + message_id)
-    // console.log("messageInfo is " + messageInfo[0].message_body)
+    console.log(messageInfo)
+    console.log("message_subject = " + messageInfo[0].message_subject)
     res.render(`./inbox/message`, {
-      title: "View Message",
+      title: `${messageInfo[0].message_subject}`,
       nav,
       errors: null,
       div,
@@ -55,9 +52,6 @@ async function buildInboxView(req, res) {
     const message_id = req.params.message_id
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
     const div = await utilities.buildMessage(messageInfo)
-    // console.log("Div" + div)
-    // console.log("message_id = " + message_id)
-    // console.log("messageInfo is " + messageInfo[0].message_body)
     res.render(`./inbox/reply`, {
       title: "Reply Message",
       nav,
@@ -71,7 +65,7 @@ async function buildInboxView(req, res) {
   async function createNewMessageView(req, res){
     let nav = await utilities.getNav()
     let select = await utilities.selectEmail()
-    res.render('./inbox/new-message',{
+    res.render('./inbox/create-message',{
       title: "New Message",
       nav,
       select,
@@ -79,4 +73,33 @@ async function buildInboxView(req, res) {
     })
 }
 
-module.exports = { buildInboxView, buildMessageView, buildReplyView, createNewMessageView}
+async function sendNewMessage(req, res){
+    let nav = await utilities.getNav()
+    const {account_id, message_subject, message_body} = req.body
+    const message_from = res.locals.accountData.account_id
+    console.log("Message_from from payload", message_from)
+    const inserted = await inboxModel.sendMessage(parseInt(account_id), message_from, message_subject, message_body)
+    let select = await utilities.selectEmail(parseInt(account_id))
+    if (inserted) {
+        req.flash(
+          "success semi-bold",
+          `The message was sent.`
+        )
+        res.redirect(`/inbox/${res.locals.accountData.account_id}`)
+    } else {
+        req.flash("notice", "Sorry, the message could not be sent.")
+        res.status(501).render("./inbox/create-message", {
+          title: "New Message",
+          nav,
+          select: select,
+          errors: null,
+          account_id,
+          message_from,
+          message_subject,
+          message_body
+        })
+    }
+}
+
+
+module.exports = { buildInboxView, buildMessageView, buildReplyView, createNewMessageView, sendNewMessage}

@@ -13,17 +13,18 @@
    </ul>
   <% } %>
   
-<%- p %>
+<%#- p %>
 
-<!-- <form id="replyMessageForm" action="/inbox/create-message" method="post">
+<form id="replyMessageForm" action="/inbox/reply" method="post">
   <label for="account_id" class="regular">To:</label><br>
   <%#- select %>
+  <input for="message_to" class="regular" value="<%=locals.account_firstname%> <%=locals.account_lastname%>"><br>
   <label for="message_subject" class="regular">Subject:*</label><br>
-  <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%#= locals.message_subject %>"><br>
+  <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%=locals.message_subject %>"><br>
     
   <label for="message_body" class="regular">Message:*</label><br>
-  <textarea id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character"><%#= locals.message_body %></textarea><br>
+  <textarea id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character">////Previous Message////<%= locals.message_body %></textarea><br>
 
   <button type="submit" class="semi-bold" id="newMessageButton">Send</button>
 
-</form> -->
+</form>

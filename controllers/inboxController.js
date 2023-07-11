@@ -92,23 +92,18 @@ async function sendNewMessage(req, res){
   async function buildReplyView(req, res) {
     let nav = await utilities.getNav()
     const message_id = req.params.message_id
-    console.log(message_id)
-    const {message_subject, message_body, message_from} = req.body
-    // console.log(message_subject, message_from, message_body)
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
-    console.log(messageInfo[0].message_subject)
-    // const div = await utilities.buildMessage(messageInfo)
-    const p = await utilities.buildReplyMessage(message_id)
-    console.log("P",p)
     res.render(`./inbox/reply`, {
       title: "Reply Message",
       nav,
       errors: null,
       message_id: message_id,
-      message_subject, 
-      message_body, 
-      message_from,
-      p
+      message_subject:messageInfo[0].message_subject, 
+      message_body:messageInfo[0].message_body, 
+      message_from:messageInfo[0].message_from,
+      account_firstname:messageInfo[0].account_firstname,
+      account_lastname:messageInfo[0].account_lastname
+      // p
     })
   }
 

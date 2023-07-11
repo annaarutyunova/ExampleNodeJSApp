@@ -93,6 +93,7 @@ async function sendNewMessage(req, res){
     let nav = await utilities.getNav()
     const message_id = req.params.message_id
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
+    const spaces = "\n\n\n\n////Previous Message////\n"
     res.render(`./inbox/reply`, {
       title: "Reply Message",
       nav,
@@ -102,7 +103,8 @@ async function sendNewMessage(req, res){
       message_body:messageInfo[0].message_body, 
       message_from:messageInfo[0].message_from,
       account_firstname:messageInfo[0].account_firstname,
-      account_lastname:messageInfo[0].account_lastname
+      account_lastname:messageInfo[0].account_lastname,
+      spaces
       // p
     })
   }

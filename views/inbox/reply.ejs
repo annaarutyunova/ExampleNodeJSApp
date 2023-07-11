@@ -23,7 +23,7 @@
   <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="<%=locals.message_subject %>"><br>
     
   <label for="message_body" class="regular">Message:*</label><br>
-  <textarea id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character">////Previous Message////<%= locals.message_body %></textarea><br>
+  <textarea id="message_body" minlength="1" name="message_body" required placeholder="Min 1 character"><%-spaces%><%= locals.message_body %></textarea><br>
 
   <button type="submit" class="semi-bold" id="newMessageButton">Send</button>
 

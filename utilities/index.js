@@ -218,20 +218,6 @@ Util.selectEmail = async function(optionSelected){
   return select
 }
 
-// Util.buildReplyMessage = async function(message_id){
-//   const data = await inboxModel.getMessageByMessageId(message_id)
-//   console.log(data[0])
-//   let form = `<form id="replyMessageForm" action="/inbox/reply" method="post">
-//   <label for="message_to" class="regular">To:</label><br>
-//   <input for="message_to" class="regular" value="${data[0].account_firstname} ${data[0].account_lastname}"><br>`
-//   form +=`<label for="message_subject" class="regular">Subject:*</label><br>
-//   <input type="text" id="message_subject" minlength="1" name="message_subject" required placeholder="Min 1 character" value="RE: ${data[0].message_subject}"><br>`
-//   form += `<label for="reply_message_body" class="regular">Message:*</label><br>
-//   <textarea id="reply_message_body" minlength="1" name="message_body" required placeholder="Min 1 character">//////Previous Message//////${data[0].message_body}</textarea><br>`
-//   form += `<button type="submit" class="semi-bold" id="replyButton">Send</button>`
-//   form += `</form>`
-//   return form
-// }
 
 
 

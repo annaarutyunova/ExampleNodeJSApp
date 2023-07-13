@@ -64,7 +64,17 @@ async function deleteMessage(message_id){
   }
 }
 
+async function messageArchived(message_id){
+  try{
+    const sql = "UPDATE message SET message_archived = 'true' WHERE message_id = $1 RETURNING *"
+    return await pool.query(sql, [message_id])
+  } catch(error){
+    console.error("markeAsRead() in inbox-model" + error)
+    return error.message
+  }
+}
+
   
 
   
-module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage};
+module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage, messageArchived};

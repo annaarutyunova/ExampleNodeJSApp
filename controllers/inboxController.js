@@ -178,7 +178,7 @@ async function markAsRead(req, res){
 }
 }
 
-
+// Delete Message
 async function deleteMessage(req, res){
   let nav = await utilities.getNav()
   const message_id = req.params.message_id
@@ -206,7 +206,35 @@ async function deleteMessage(req, res){
     }
 }
 
+// Archive
+async function archiveMessage(req, res){
+  let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+  const messageInfo = await inboxModel.messageArchived(message_id)
+  if (messageInfo) {
+    req.flash(
+      "success semi-bold",
+      `Message archived.`
+    )
+    const inboxData = await inboxModel.getMessageFromAccountId(res.locals.accountData.account_id)
+    const table = await utilities.buildInbox(inboxData)
+    res.status(201).render(`inbox/inbox`, {
+      title: "inbox",
+      nav,
+      errors: null,
+      table
+    })
+    } else {
+      req.flash(
+        "notice semi-bold",
+        `Something went wrong.`
+      )
+      res.redirect(`/inbox/message/${res.locals.accountData.account_id}`)
+    }
+}
+
 
 module.exports = { buildInboxView, buildMessageView, buildReplyView, createNewMessageView, sendNewMessage, reply, markAsRead
   , deleteMessage
+  , archiveMessage
 }

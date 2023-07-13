@@ -181,12 +181,17 @@ Util.buildInbox = async function(data) {
   // Set up the table body 
   dataTable += '<tbody class="regular">'; 
   // Iterate over all vehicles in the array and put each in a row 
-   data.forEach(function (message) {
-  //  console.log(message.inv_id + ", " + message.inv_model); 
-   dataTable += `<tr><td>${message.message_created}</td>`; 
-   dataTable += `<td><a href='/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
-   dataTable += `<td>${message.account_firstname} ${message.account_lastname}</td>`; 
-   dataTable += `<td>${message.message_read}</td></tr>`;  
+  data.forEach(function (message) {
+  // Check if it is archived
+  if (message.message_archived == false){
+    //  console.log(message.inv_id + ", " + message.inv_model); 
+    dataTable += `<tr><td>${message.message_created}</td>`; 
+    dataTable += `<td><a href='/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
+    dataTable += `<td>${message.account_firstname} ${message.account_lastname}</td>`; 
+    dataTable += `<td>${message.message_read}</td></tr>`; 
+   } else{
+    console.log("message_archived", typeof(message.message_archived))
+   }
   }) 
   dataTable += '</tbody></table>'; 
   // Display the contents in the Inventory Management view 
@@ -218,6 +223,7 @@ Util.selectEmail = async function(optionSelected){
   select += "</select><br>"
   return select
 }
+
 
 
 

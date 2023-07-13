@@ -33,4 +33,6 @@ router.get("/message/read/:message_id",utilities.handleErrors(inboxController.ma
 
 router.get("/message/delete/:message_id", utilities.handleErrors(inboxController.deleteMessage))
 
+router.get("/message/archive/:message_id", utilities.handleErrors(inboxController.archiveMessage))
+
 module.exports = router

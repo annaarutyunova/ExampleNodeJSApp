@@ -207,11 +207,12 @@ Util.selectEmail = async function(optionSelected){
   const emails = await inboxModel.getAccountId()
   let select = "<select name='account_id' class='semi-bold' id='account_id'>"
   let option = "<option value=''>Send to</option>"
+  console.log("Before for each",parseInt(optionSelected))
   emails.rows.forEach((row) => {
     option += `<option value = "${row.account_id}" ${row.account_id === Number(optionSelected)? "selected": ""}
     > ${row.account_firstname} ${row.account_lastname}</option> `
-    console.log("Stupid accoutnid", row.account_id)
-    console.log("option selected", optionSelected)
+    // console.log("Stupid accoutnid", row.account_id)
+    // console.log("option selected", optionSelected)
   })
   select += option 
   select += "</select><br>"

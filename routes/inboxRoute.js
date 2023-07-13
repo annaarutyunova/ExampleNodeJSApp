@@ -20,7 +20,17 @@ regValidate.inboxRules(),
 regValidate.checkInboxData,
 utilities.handleErrors(inboxController.sendNewMessage))
 
+// Create new message in the database
+router.post("/reply", 
+regValidate.inboxRules(),
+regValidate.checkReply,
+utilities.handleErrors(inboxController.reply))
+
 // Deliver create new message view
 router.get("/create-message/:account_id", utilities.handleErrors(inboxController.createNewMessageView))
+
+router.get("/message/read/:message_id",utilities.handleErrors(inboxController.markAsRead))
+
+router.get("/message/delete/:message_id", utilities.handleErrors(inboxController.deleteMessage))
 
 module.exports = router

@@ -1,6 +1,7 @@
 const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
+const inboxModel = require("../models/inbox-model")
 // const inboxtModel = require("../models/inbox-model")
 
 validate.inboxRules = () => {
@@ -25,12 +26,12 @@ validate.inboxRules = () => {
    * Check data and return errors or continue to login
    * ***************************** */
   validate.checkInboxData = async (req, res, next) => {
-      const { message_subject, message_body } = req.body
+      const { message_subject, message_body, account_id } = req.body
       let errors = []
       errors = validationResult(req)
       if (!errors.isEmpty()) {
+        let select = await utilities.selectEmail((account_id))
         let nav = await utilities.getNav()
-        let select = await utilities.selectEmail()
         res.render("inbox/create-message", {
           errors,
           title: "New Message",
@@ -43,6 +44,27 @@ validate.inboxRules = () => {
       }
       next()
     }
+
+validate.checkReply = async (req, res, next) => {
+  const { message_subject, message_body } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let select = await utilities.selectEmail()
+    res.render("inbox/reply", {
+      errors,
+      title: "Reply Message",
+      nav,
+      select,
+      message_subject, 
+      message_body
+    })
+    return
+  }
+  next()
+}
+
 
 
 module.exports = validate

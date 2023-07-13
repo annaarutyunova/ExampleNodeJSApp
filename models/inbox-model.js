@@ -74,7 +74,17 @@ async function messageArchived(message_id){
   }
 }
 
-  
+// Get number of archived messages for the account
+async function getArchivedMessagesByAccountId(account_id) {
+  try {
+      const result = await pool.query(
+      "SELECT count(1) FROM public.message WHERE message_to = $1 and message_archived = true",
+      [account_id])
+      return result.rows
+  } catch (error) {
+      return new Error("No messages found")
+  }
+}
 
   
-module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage, messageArchived};
+module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage, messageArchived, getArchivedMessagesByAccountId};

@@ -1,0 +1,21 @@
+<!-- Header -->
+<% if (title) { %>
+    <h1 class="bold" id="archiveTitle"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<!-- Enable display errors -->
+<% if (errors) { %>
+    <ul class="notice semi-bold">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<%-messages()%>
+
+<a class="regular" id="returnToInbox" href="/inbox/<%-locals.accountData.account_id %>">Return to Inbox</a><br><br>
+
+<%-table%>

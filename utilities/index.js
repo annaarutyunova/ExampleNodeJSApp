@@ -224,6 +224,33 @@ Util.selectEmail = async function(optionSelected){
   return select
 }
 
+// Build the archived table
+Util.archived = async function(data) {
+  let table = '<table>'
+  // Set up the table labels 
+  let dataTable = '<thead class="semi-bold">'; 
+  dataTable += '<tr><th>Received</th><th>Subject</th><th>From</th><th>Read</th></tr>'; 
+  dataTable += '</thead>'; 
+  // Set up the table body 
+  dataTable += '<tbody class="regular">'; 
+  // Iterate over all vehicles in the array and put each in a row 
+  data.forEach(function (message) {
+  // Check if it is archived
+  if (message.message_archived == true){
+    //  console.log(message.inv_id + ", " + message.inv_model); 
+    dataTable += `<tr><td>${message.message_created}</td>`; 
+    dataTable += `<td><a href='/inbox/message/${message.message_id}' title='Click to view'>${message.message_subject}</a></td>`; 
+    dataTable += `<td>${message.account_firstname} ${message.account_lastname}</td>`; 
+    dataTable += `<td>${message.message_read}</td></tr>`; 
+   } else{
+    console.log("message_archived", typeof(message.message_archived))
+   }
+  }) 
+  dataTable += '</tbody></table>'; 
+  // Display the contents in the Inventory Management view 
+  return table += dataTable;
+}
+
 
 
 

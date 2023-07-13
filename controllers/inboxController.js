@@ -15,14 +15,17 @@ async function buildInboxView(req, res) {
     const account_id = req.params.account_id
     const inboxData = await inboxModel.getMessageFromAccountId(account_id)
     const table = await utilities.buildInbox(inboxData)
+    const archived_messages = await inboxModel.getArchivedMessagesByAccountId(account_id)
+    console.log("Archived Messages", archived_messages[0].count)
     res.render(`inbox/inbox`, {
-      title: firstname + " " + lastname + " " +  "Inbox",
+      title: firstname + " " + lastname + "'s " +  "Inbox",
       nav,
       errors: null,
       account_id: account_id,
       account_firstname : firstname,
       account_lastname : lastname,
-      table
+      table,
+      archived_messages: archived_messages[0].count
     })
   }
   
@@ -206,35 +209,28 @@ async function deleteMessage(req, res){
     }
 }
 
-// Archive
-async function archiveMessage(req, res){
+// Archived Messages
+async function archivedMessages(req, res) {
   let nav = await utilities.getNav()
-  const message_id = req.params.message_id
-  const messageInfo = await inboxModel.messageArchived(message_id)
-  if (messageInfo) {
-    req.flash(
-      "success semi-bold",
-      `Message archived.`
-    )
-    const inboxData = await inboxModel.getMessageFromAccountId(res.locals.accountData.account_id)
-    const table = await utilities.buildInbox(inboxData)
-    res.status(201).render(`inbox/inbox`, {
-      title: "inbox",
-      nav,
-      errors: null,
-      table
-    })
-    } else {
-      req.flash(
-        "notice semi-bold",
-        `Something went wrong.`
-      )
-      res.redirect(`/inbox/message/${res.locals.accountData.account_id}`)
-    }
+  let firstname = res.locals.accountData.account_firstname
+  let lastname = res.locals.accountData.account_lastname
+  const account_id = req.params.account_id
+  const inboxData = await inboxModel.getMessageFromAccountId(account_id)
+  const table = await utilities.archived(inboxData)
+  res.render(`inbox/archive`, {
+    title: firstname + " " + lastname + "'s " +  "Archives",
+    nav,
+    errors: null,
+    account_id: account_id,
+    account_firstname : firstname,
+    account_lastname : lastname,
+    table
+  })
 }
+
 
 
 module.exports = { buildInboxView, buildMessageView, buildReplyView, createNewMessageView, sendNewMessage, reply, markAsRead
   , deleteMessage
-  , archiveMessage
+  , archivedMessages
 }

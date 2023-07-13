@@ -35,4 +35,8 @@ router.get("/message/delete/:message_id", utilities.handleErrors(inboxController
 
 router.get("/message/archive/:message_id", utilities.handleErrors(inboxController.archiveMessage))
 
+// Archive
+router.get("/archive/:account_id", utilities.handleErrors(inboxController.archivedMessages))
+
+
 module.exports = router

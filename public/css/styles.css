@@ -213,7 +213,7 @@ footer{
   line-height: 2em;
 }
 
-#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle, #inboxTitle, #messageTitle, #replyTitle{
+#vehicles, #addClassificationTitle, #managementTitle, #loginTitle, #registerTitle, #accountTitle, #editInventoryTitle, #editAccountTitle, #editAccountPasswordTitle, #inboxTitle, #messageTitle, #replyTitle, #archiveTitle{
   text-align: left;
   font-size: 1.5em;
 }

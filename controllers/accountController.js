@@ -4,6 +4,7 @@
 ***************************************/
 const utilities = require("../utilities")
 const accountModel = require("../models/account-model")
+const inboxModel = require("../models/inbox-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -120,11 +121,15 @@ async function accountLogin(req, res) {
 // Account Management
 async function buildAccountManagement(req, res) {
   let nav = await utilities.getNav()
+  const unread_messages = await inboxModel.getUnreadMessages(parseInt(res.locals.accountData.account_id))
+  console.log("ID",res.locals.accountData.account_id)
+  console.log("Unread messages",unread_messages)
   req.flash("success semi-bold", "You're logged in")
   res.render("account/account", {
     title: "Account Management",
     nav,
-    errors: null
+    errors: null,
+    unread_messages: unread_messages[0].count
   })
 }
 

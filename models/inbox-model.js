@@ -66,6 +66,7 @@ async function deleteMessage(message_id){
 
 async function messageArchived(message_id){
   try{
+    console.log("MI",message_id)
     const sql = "UPDATE message SET message_archived = 'true' WHERE message_id = $1 RETURNING *"
     return await pool.query(sql, [message_id])
   } catch(error){
@@ -86,5 +87,16 @@ async function getArchivedMessagesByAccountId(account_id) {
   }
 }
 
+async function getUnreadMessages(account_id){
+  try {
+    const result = await pool.query(
+      "SELECT count(1) FROM public.message WHERE message_to = $1 and message_read = false",
+      [account_id])
+      return result.rows
+  } catch (error) {
+      return new Error("No messages found")
+  }
+}
+
   
-module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage, messageArchived, getArchivedMessagesByAccountId};
+module.exports = {getMessageFromAccountId, getMessageByMessageId, getAccountId, sendMessage, markAsRead, deleteMessage, messageArchived, getArchivedMessagesByAccountId, getUnreadMessages};

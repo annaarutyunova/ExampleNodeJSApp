@@ -16,7 +16,7 @@ async function buildInboxView(req, res) {
     const inboxData = await inboxModel.getMessageFromAccountId(account_id)
     const table = await utilities.buildInbox(inboxData)
     const archived_messages = await inboxModel.getArchivedMessagesByAccountId(account_id)
-    console.log("Archived Messages", archived_messages[0].count)
+    // console.log("Archived Messages", archived_messages[0].count)
     res.render(`inbox/inbox`, {
       title: firstname + " " + lastname + "'s " +  "Inbox",
       nav,
@@ -35,14 +35,14 @@ async function buildInboxView(req, res) {
     const message_id = req.params.message_id
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
     const div = await utilities.buildMessage(messageInfo)
-    console.log(messageInfo)
-    console.log("message_subject = " + messageInfo[0].message_subject)
+    // console.log(messageInfo)
+    // console.log("message_subject = " + messageInfo[0].message_subject)
     res.render(`./inbox/message`, {
       title: `${messageInfo[0].message_subject}`,
       nav,
       errors: null,
       div,
-      message_id: message_id,
+      message_id: message_id
     })
   }
  
@@ -94,7 +94,7 @@ async function sendNewMessage(req, res){
     let nav = await utilities.getNav()
     const message_id = req.params.message_id
     const messageInfo = await inboxModel.getMessageByMessageId(message_id)
-    console.log(messageInfo[0].message_id)
+    // console.log(messageInfo[0].message_id)
     let select = await utilities.selectEmail(parseInt(messageInfo[0].message_from))
     const spaces = "\n\n\n\n////Previous Message////\n"
     const re = "RE:"
@@ -119,12 +119,12 @@ async function reply(req, res){
   let nav = await utilities.getNav()
   const {account_id, message_subject, message_body} = req.body
   const message_from = res.locals.accountData.account_id
-  console.log("Message_from from payload", message_from)
+  // console.log("Message_from from payload", message_from)
   const inserted = await inboxModel.sendMessage(parseInt(account_id), message_from, message_subject, message_body)
   const spaces = "\n\n\n\n////Previous Message////\n"
   const re = "RE:"
   let select = await utilities.selectEmail(parseInt(account_id))
-  console.log("Accountid ", account_id)
+  // console.log("Accountid ", account_id)
   if (inserted) {
       req.flash(
         "success semi-bold",
@@ -153,9 +153,10 @@ async function markAsRead(req, res){
   const message_id = req.params.message_id
   const message_read = await inboxModel.markAsRead(message_id)
   const messageInfo = await inboxModel.getMessageByMessageId(message_id)
+  const archived_messages = await inboxModel.getArchivedMessagesByAccountId(res.locals.accountData.account_id)
   const div = await utilities.buildMessage(messageInfo)
-  console.log(messageInfo)
-  console.log("message_subject = " + messageInfo[0].message_subject)
+  // console.log(messageInfo)
+  // console.log("message_subject = " + messageInfo[0].message_subject)
   if (message_read) {
     req.flash(
       "success semi-bold",
@@ -170,7 +171,9 @@ async function markAsRead(req, res){
       div,
       message_id: message_id,
       message_read: messageInfo[0].message_read,
-      table
+      table,
+      archived_messages: archived_messages[0].count
+
     })
 } else {
   req.flash(
@@ -185,8 +188,9 @@ async function markAsRead(req, res){
 async function deleteMessage(req, res){
   let nav = await utilities.getNav()
   const message_id = req.params.message_id
-  console.log("Message_id", message_id)
+  // console.log("Message_id", message_id)
   const messageInfo = await inboxModel.deleteMessage(message_id)
+  const archived_messages = await inboxModel.getArchivedMessagesByAccountId(res.locals.accountData.account_id)
   if (messageInfo) {
     req.flash(
       "success semi-bold",
@@ -198,7 +202,9 @@ async function deleteMessage(req, res){
       title: "inbox",
       nav,
       errors: null,
-      table
+      table,
+      archived_messages: archived_messages[0].count
+
     })
     } else {
       req.flash(
@@ -209,13 +215,53 @@ async function deleteMessage(req, res){
     }
 }
 
+// Archive Message
+async function archiveMessage(req,res){
+  console.log("Here")
+  console.log("There",req.params.message_id)
+  const message_id = req.params.message_id
+  console.log("Message_id", message_id)
+  // const account_id = req.params.account_id
+  // const inboxData = await inboxModel.getMessageFromAccountId(account_id)
+  const archive = await inboxModel.messageArchived(message_id)
+  const archived_messages = await inboxModel.getArchivedMessagesByAccountId(res.locals.accountData.account_id)
+  if (archive) {
+    req.flash(
+      "success semi-bold",
+      `Message archived.`
+    )
+    let nav = await utilities.getNav()
+    const inboxData = await inboxModel.getMessageFromAccountId(res.locals.accountData.account_id)
+    const table = await utilities.buildInbox(inboxData)
+    res.status(201).render(`inbox/inbox`, {
+      title: "inbox",
+      nav,
+      errors: null,
+      table,
+      archived_messages: archived_messages[0].count,
+      archive
+    })
+    } else {
+      req.flash(
+        "notice semi-bold",
+        `Something went wrong.`
+      )
+      res.redirect(`/inbox/message/${res.locals.accountData.account_id}`)
+    }
+}
+
+
 // Archived Messages
 async function archivedMessages(req, res) {
   let nav = await utilities.getNav()
   let firstname = res.locals.accountData.account_firstname
   let lastname = res.locals.accountData.account_lastname
+  const message_id = req.params.message_id
   const account_id = req.params.account_id
   const inboxData = await inboxModel.getMessageFromAccountId(account_id)
+  const archive = await inboxModel.messageArchived(message_id)
+  const archived_messages = await inboxModel.getArchivedMessagesByAccountId(res.locals.accountData.account_id)
+  // console.log(archived_messages)
   const table = await utilities.archived(inboxData)
   res.render(`inbox/archive`, {
     title: firstname + " " + lastname + "'s " +  "Archives",
@@ -224,7 +270,10 @@ async function archivedMessages(req, res) {
     account_id: account_id,
     account_firstname : firstname,
     account_lastname : lastname,
-    table
+    table,
+    archived_messages: archived_messages[0].count,
+    archive
+
   })
 }
 
@@ -233,4 +282,5 @@ async function archivedMessages(req, res) {
 module.exports = { buildInboxView, buildMessageView, buildReplyView, createNewMessageView, sendNewMessage, reply, markAsRead
   , deleteMessage
   , archivedMessages
+  , archiveMessage
 }

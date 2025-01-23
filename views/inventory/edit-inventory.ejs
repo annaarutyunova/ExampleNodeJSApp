@@ -43,9 +43,7 @@
         <input type="text" id="invColor" name="inv_color" required value="<%= locals.inv_color %>"><br>
 
         <button type="submit" class="semi-bold" id="editVehicleButton" disabled>Update Vehicle</button>
-        <input type="hidden" name="inv_id"
-        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-        <% } %>>
+        <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>
   </form>
 
 <script src="../../js/inv-update.js"></script>

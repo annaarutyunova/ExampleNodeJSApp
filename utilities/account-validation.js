@@ -137,14 +137,6 @@ validate.checkLoginData = async (req, res, next) => {
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")  
-  //     .custom(async (account_email) => {
-  //       if(account_email != res.locals.accountData.account_email) {
-  //       const emailMatches = await accountModel.checkExistingEmail(account_email)
-  //       if (emailMatches == 1){
-  //           throw new Error("Email exists. User a different email or leave the original.")
-  //       }
-  //     }
-  // })
       .custom(async (account_email, {req}) => {
         const account_id = req.body.account_id
         // const account = await accountModel.getAccountDataById(req.body.account_id)
@@ -152,12 +144,7 @@ validate.checkLoginData = async (req, res, next) => {
         const emailExists = await accountModel.checkExistingEmail(account_email)
         // Check if submitted email is same as existing
         if (emailExists && account_email !== account.account_email) {
-          // No - Check if email exists in table
-          // const emailExists = await accountModel.checkExistingEmail(account_email)
-          // Yes - throw error
-          // if (emailExists == 1) {
           throw new Error("Email exists. Please login or use different email")
-          // }
         }
       })     
   ]

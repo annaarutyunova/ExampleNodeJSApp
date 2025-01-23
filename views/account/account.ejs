@@ -22,14 +22,13 @@
 <% } %>
 
 <!-- Add Message Center. Not dependent on the account type. -->
-<h3 class="semi-bold">Message Center</h3>
+<!-- UNCOMMENT WHEN ADDING INBOX AGAIN -->
+<!-- <h3 class="semi-bold">Message Center</h3>
 <ul>
-  <li class="regular">View <%-unread_messages%> unread messages.
-    <!-- <a class="regular" href="/account/message"></a> -->
+  <li class="regular">View <%#unread_messages%> unread messages.
   </li>
-  <!-- if inbox controller doesn't work, change link to /account/inbox/... -->
-  <li class="regular">Go to <a class="regular" href="/inbox/<%-locals.accountData.account_id %>" id="inbox">Inbox</a></li>
-</ul>
+  <li class="regular">Go to <a class="regular" href="/inbox/<%#locals.accountData.account_id %>" id="inbox">Inbox</a></li>
+</ul> -->
 
 <!-- Assignment 5 -->
 <% if(locals.accountData.account_type == 'Employee' || locals.accountData.account_type == 'Admin' ){  %>
